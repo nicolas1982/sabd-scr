@@ -63,8 +63,6 @@ public class JPanelRegistroMedicion extends javax.swing.JPanel {
 
         jLabel6.setText("Fecha Registraci\u00f3n");
 
-        jFormattedTextField1.setText("unaFecha");
-
         jButtonRegistrarMedicion.setText("Registrar");
         jButtonRegistrarMedicion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
