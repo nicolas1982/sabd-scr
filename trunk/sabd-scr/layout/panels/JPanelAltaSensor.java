@@ -11,10 +11,13 @@ package layout.panels;
  * @author  Administrador
  */
 public class JPanelAltaSensor extends javax.swing.JPanel {
+    private Integer idSector;
+    private int tipoSensor;
     
     /** Creates new form JPanelAltaSensor */
     public JPanelAltaSensor() {
         initComponents();
+        extraInitComponents();
     }
     
     /** This method is called from within the constructor to
@@ -29,7 +32,7 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        jButtonRegistrarSensor = new javax.swing.JButton();
 
         jLabel1.setText("Alta Sensor");
 
@@ -41,7 +44,13 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("Ok");
+        jButtonRegistrarSensor.setText("Registrar");
+        jButtonRegistrarSensor.setToolTipText("Registra un Sensor");
+        jButtonRegistrarSensor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistrarSensorActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -63,8 +72,8 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
                                     .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
                     .add(layout.createSequentialGroup()
                         .add(158, 158, 158)
-                        .add(jButton1)))
-                .addContainerGap(197, Short.MAX_VALUE))
+                        .add(jButtonRegistrarSensor)))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -80,14 +89,37 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
                     .add(jLabel3)
                     .add(jComboBox2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(59, 59, 59)
-                .add(jButton1)
+                .add(jButtonRegistrarSensor)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonRegistrarSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarSensorActionPerformed
+        // TODO llamar al SP SP_ALTA_SENSOR(idSector INTEGER, tipoSensor SMALLINT) 
+    }//GEN-LAST:event_jButtonRegistrarSensorActionPerformed
+
+    private void extraInitComponents() {
+        loadCombos();
+    }
+
+    private void loadCombos() {
+        loadComboTipoSensor();
+        loadComboSector();
+    }
+
+    private void loadComboTipoSensor() {
+        //TODO llamar al SP SP_GET_TIPO_SENSORES(); 
+        // crear SP, no estaba especificado!
+    }
+
+    private void loadComboSector() {
+        //TODO llamar al SP SP_GET_SECTORES();
+        // crear SP, no estaba especificado!
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonRegistrarSensor;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
