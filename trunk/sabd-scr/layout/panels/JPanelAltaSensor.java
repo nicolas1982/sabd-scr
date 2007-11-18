@@ -6,6 +6,10 @@
 
 package layout.panels;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import layout.entities.TipoSensor;
+
 /**
  *
  * @author  Administrador
@@ -18,6 +22,8 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
     public JPanelAltaSensor() {
         initComponents();
         extraInitComponents();
+        
+        loadValuesCombos();//TODO sacar cuando esten las llamadas a los SP
     }
     
     /** This method is called from within the constructor to
@@ -29,20 +35,31 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
     private void initComponents() {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxTipoSensor = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        jComboBoxSector = new javax.swing.JComboBox();
         jButtonRegistrarSensor = new javax.swing.JButton();
+        jLabelErrorTipoSensor = new javax.swing.JLabel();
+        jLabelErrorSector = new javax.swing.JLabel();
 
         jLabel1.setText("Alta Sensor");
 
         jLabel2.setText("Tipo De Sensor");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTipoSensor.setToolTipText("Tipo de sensor");
+        jComboBoxTipoSensor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoSensorActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Sector");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSectorActionPerformed(evt);
+            }
+        });
 
         jButtonRegistrarSensor.setText("Registrar");
         jButtonRegistrarSensor.setToolTipText("Registra un Sensor");
@@ -51,6 +68,12 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
                 jButtonRegistrarSensorActionPerformed(evt);
             }
         });
+
+        jLabelErrorTipoSensor.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErrorTipoSensor.setText("[errorTipoSensor]");
+
+        jLabelErrorSector.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErrorSector.setText("[errorSector]");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -68,12 +91,16 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
                                     .add(jLabel3))
                                 .add(52, 52, 52)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jComboBox2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
+                                    .add(jComboBoxTipoSensor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(jComboBoxSector, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(49, 49, 49)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jLabelErrorSector)
+                                    .add(jLabelErrorTipoSensor)))))
                     .add(layout.createSequentialGroup()
                         .add(158, 158, 158)
                         .add(jButtonRegistrarSensor)))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -83,23 +110,47 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
                 .add(28, 28, 28)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
-                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jComboBoxTipoSensor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabelErrorTipoSensor))
                 .add(22, 22, 22)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel3)
-                    .add(jComboBox2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jComboBoxSector, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabelErrorSector))
                 .add(59, 59, 59)
                 .add(jButtonRegistrarSensor)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBoxSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSectorActionPerformed
+        // TODO
+        Integer idSector = (Integer) jComboBoxSector.getModel().getSelectedItem();
+        this.idSector = idSector;
+    }//GEN-LAST:event_jComboBoxSectorActionPerformed
+
+    private void jComboBoxTipoSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoSensorActionPerformed
+        TipoSensor tipoSensor = (TipoSensor) jComboBoxTipoSensor.getModel().getSelectedItem();
+        this.tipoSensor = tipoSensor.getIdTipoSensor();
+    }//GEN-LAST:event_jComboBoxTipoSensorActionPerformed
+
     private void jButtonRegistrarSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarSensorActionPerformed
-        // TODO llamar al SP SP_ALTA_SENSOR(idSector INTEGER, tipoSensor SMALLINT) 
+        boolean validateOk = validarAltaSensor();
+        System.out.println("sensor: " + this.tipoSensor);
+        System.out.println("sector: " + this.idSector);
+        if(validateOk) {
+            // TODO llamar al SP SP_ALTA_SENSOR(idSector INTEGER, tipoSensor SMALLINT) 
+            //jLabelErrorSector.setVisible(false);
+            //jLabelErrorTipoSensor.setVisible(false);
+        } else {
+           //Nothing
+        }
+        
     }//GEN-LAST:event_jButtonRegistrarSensorActionPerformed
 
     private void extraInitComponents() {
         loadCombos();
+        initLabelsError();
     }
 
     private void loadCombos() {
@@ -108,23 +159,75 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
     }
 
     private void loadComboTipoSensor() {
-        //TODO llamar al SP SP_GET_TIPO_SENSORES(); 
-        // crear SP, no estaba especificado!
+        for (TipoSensor ts : TipoSensor.values()) {
+            jComboBoxTipoSensor.addItem(ts);
+        }
+        jComboBoxTipoSensor.getModel().setSelectedItem(TipoSensor.SELECCIONE);
     }
 
     private void loadComboSector() {
         //TODO llamar al SP SP_GET_SECTORES();
-        // crear SP, no estaba especificado!
     }
+
+    private void loadValuesCombos() {
+        jComboBoxSector.addItem(new Integer(1));
+        jComboBoxSector.addItem(new Integer(2));
+        
+        
+    }
+
+    private boolean validarAltaSensor() {
+        boolean validate = validateTipoSensor() && validateSector();
+        return validate;
+    }
+
+    private boolean validateTipoSensor() {
+        boolean validate = validateCombo(jComboBoxTipoSensor);
+        if(!validate) {
+            putError(jLabelErrorTipoSensor, "Debe seleccionar un Sensor");
+        } else {
+            jLabelErrorTipoSensor.setVisible(false);
+        }
+        return validate;
+    }
+    
+    private boolean validateSector() {
+        boolean validate = validateCombo(jComboBoxSector);
+        if(!validate) {
+           putError(jLabelErrorSector, "Debe seleccionar un Sector");
+        } else {
+            jLabelErrorSector.setVisible(false);
+        }
+        return validate;
+    }
+
+    private void putError(JLabel labelError, String messageError) {
+        labelError.setText(messageError);
+        labelError.setVisible(true);
+    }
+
+    private boolean validateCombo(JComboBox jComboBox) {
+        int indexSelected = jComboBox.getSelectedIndex();
+        return indexSelected != 0;
+    }
+
+    private void initLabelsError() {
+        jLabelErrorSector.setVisible(false);
+        jLabelErrorTipoSensor.setVisible(false);
+    }
+
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonRegistrarSensor;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBoxSector;
+    private javax.swing.JComboBox jComboBoxTipoSensor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelErrorSector;
+    private javax.swing.JLabel jLabelErrorTipoSensor;
     // End of variables declaration//GEN-END:variables
     
 }
