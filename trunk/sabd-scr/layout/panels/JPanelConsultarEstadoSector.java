@@ -15,6 +15,7 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
     /** Creates new form JPanelConsultarEstadoSector */
     public JPanelConsultarEstadoSector() {
         initComponents();
+        extraInitComponents();
     }
     
     /** This method is called from within the constructor to
@@ -119,8 +120,16 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-    
+
+    private void extraInitComponents() {
+        loadCombos();
+    }
+
+    private void loadCombos() {
+       
+    }
+
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
