@@ -13,7 +13,11 @@ import layout.panels.JPanelAltaCondicion;
 import layout.panels.JPanelAltaCondicionHoraria;
 import layout.panels.JPanelAltaCondicionNumerica;
 import layout.panels.JPanelAltaProductor;
+import layout.panels.JPanelAltaRegistroMedicion;
 import layout.panels.JPanelAltaSector;
+import layout.panels.JPanelConsultarEstadoSector;
+import layout.panels.JPanelConsultarFactura;
+import layout.panels.JPanelGenerarFacturacion;
 
 /**
  *
@@ -180,25 +184,25 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void jMenuItemConsultarEstadoSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsultarEstadoSectorActionPerformed
         if ("Consultar Estado Sector".equals(evt.getActionCommand()))
-        createFrame("Consultar Estado Sector", new JPanelAltaProductor());
+        createFrame("Consultar Estado Sector", new JPanelConsultarEstadoSector());
 
     }//GEN-LAST:event_jMenuItemConsultarEstadoSectorActionPerformed
 
     private void jMenuItemConsultarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsultarFacturaActionPerformed
         if ("Consultar Factura".equals(evt.getActionCommand()))
-        createFrame("Consultar Factura", new JPanelAltaProductor());
+        createFrame("Consultar Factura", new JPanelConsultarFactura());
 
     }//GEN-LAST:event_jMenuItemConsultarFacturaActionPerformed
 
     private void jMenuItemGenerarFacturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGenerarFacturacionActionPerformed
         if ("Generar Facturacion".equals(evt.getActionCommand()))
-        createFrame("Generar Facturacion", new JPanelAltaProductor());
+        createFrame("Generar Facturacion", new JPanelGenerarFacturacion());
 
     }//GEN-LAST:event_jMenuItemGenerarFacturacionActionPerformed
 
     private void jMenuItemAltaRegistroMedicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAltaRegistroMedicionActionPerformed
         if ("Alta Registro Medicion".equals(evt.getActionCommand()))
-        createFrame("Alta Registro Medicion", new JPanelAltaProductor());
+        createFrame("Alta Registro Medicion", new JPanelAltaRegistroMedicion());
 
     }//GEN-LAST:event_jMenuItemAltaRegistroMedicionActionPerformed
 

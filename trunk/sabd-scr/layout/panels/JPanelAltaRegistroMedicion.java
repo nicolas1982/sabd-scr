@@ -10,10 +10,10 @@ package layout.panels;
  *
  * @author  Administrador
  */
-public class JPanelRegistroMedicion extends javax.swing.JPanel {
+public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
     
     /** Creates new form JPanelRegistroMedicion */
-    public JPanelRegistroMedicion() {
+    public JPanelAltaRegistroMedicion() {
         initComponents();
     }
     
