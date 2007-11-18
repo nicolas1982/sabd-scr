@@ -6,15 +6,21 @@
 
 package layout.panels;
 
+import java.sql.Date;
+
 /**
  *
  * @author  Administrador
  */
 public class JPanelGenerarFacturacion extends javax.swing.JPanel {
     
+    private Integer idProductor;
+    private Date fechaFactura;
+    
     /** Creates new form JPanelGenerarFacturacion */
     public JPanelGenerarFacturacion() {
         initComponents();
+        extraInitComponents();
     }
     
     /** This method is called from within the constructor to
@@ -27,21 +33,25 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonGenerarFactura = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxProductor = new javax.swing.JComboBox();
 
         jLabel1.setText("Generar Factura");
 
         jLabel2.setText("Fecha");
 
-        jFormattedTextField1.setText("unaFecha");
-
-        jButton1.setText("Ok");
+        jButtonGenerarFactura.setText("Generar Factura");
+        jButtonGenerarFactura.setToolTipText("Genera una factura");
+        jButtonGenerarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenerarFacturaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Productor");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -57,12 +67,12 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
                             .add(jLabel3))
                         .add(47, 47, 47)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jComboBoxProductor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(jFormattedTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(181, Short.MAX_VALUE)
-                .add(jButton1)
+                .add(jButtonGenerarFactura)
                 .add(174, 174, 174))
         );
         layout.setVerticalGroup(
@@ -77,17 +87,33 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
                 .add(39, 39, 39)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel3)
-                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jComboBoxProductor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(53, 53, 53)
-                .add(jButton1)
+                .add(jButtonGenerarFactura)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonGenerarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarFacturaActionPerformed
+        // TODO llamar al SP SP_FAC_PROD( p_mesFactura date, p_idProductor int);
+    }//GEN-LAST:event_jButtonGenerarFacturaActionPerformed
+
+    private void extraInitComponents() {
+        loadCombos();   
+    }
+
+    private void loadCombos() {
+        loadComboProductor();
+    }
+
+    private void loadComboProductor() {
+        //TODO llamar al SP SP_GET_PRODUCTORES();
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton jButtonGenerarFactura;
+    private javax.swing.JComboBox jComboBoxProductor;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
