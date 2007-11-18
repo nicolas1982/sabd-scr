@@ -4,12 +4,12 @@ package layout.panels;
  *
  * @author  ZIGGY STARDUST
  */
-public class JPanelAltaCondNumerica extends javax.swing.JPanel {
+public class JPanelAltaCondicionNumerica extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = -8454039743612102695L;
 
 	/** Creates new form JPanelAltaCondNumerica */
-    public JPanelAltaCondNumerica() {
+    public JPanelAltaCondicionNumerica() {
         initComponents();
     }
     
