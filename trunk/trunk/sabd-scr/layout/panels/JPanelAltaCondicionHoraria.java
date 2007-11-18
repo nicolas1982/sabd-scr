@@ -4,12 +4,12 @@ package layout.panels;
  *
  * @author  ZIGGY STARDUST
  */
-public class JPanelAltaCondHoraria extends javax.swing.JPanel {
+public class JPanelAltaCondicionHoraria extends javax.swing.JPanel {
     
     private static final long serialVersionUID = 1082296173286297574L;
 	
     /** Creates new form JPanelAltaCondHoraria */
-    public JPanelAltaCondHoraria() {
+    public JPanelAltaCondicionHoraria() {
         initComponents();
     }
     
