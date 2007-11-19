@@ -42,7 +42,8 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
         jLabelErrorTipoSensor = new javax.swing.JLabel();
         jLabelErrorSector = new javax.swing.JLabel();
 
-        jLabel1.setText("Alta Sensor");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel1.setText("ALTA SENSOR");
 
         jLabel2.setText("Tipo De Sensor");
 
@@ -140,8 +141,6 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
         System.out.println("sector: " + this.idSector);
         if(validateOk) {
             // TODO llamar al SP SP_ALTA_SENSOR(idSector INTEGER, tipoSensor SMALLINT) 
-            //jLabelErrorSector.setVisible(false);
-            //jLabelErrorTipoSensor.setVisible(false);
         } else {
            //Nothing
         }
