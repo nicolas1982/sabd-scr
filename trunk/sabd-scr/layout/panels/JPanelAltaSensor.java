@@ -141,10 +141,7 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
         System.out.println("sector: " + this.idSector);
         if(validateOk) {
             // TODO llamar al SP SP_ALTA_SENSOR(idSector INTEGER, tipoSensor SMALLINT) 
-        } else {
-           //Nothing
-        }
-        
+        }         
     }//GEN-LAST:event_jButtonRegistrarSensorActionPerformed
 
     private void extraInitComponents() {

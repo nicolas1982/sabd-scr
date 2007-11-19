@@ -6,14 +6,27 @@
 
 package layout.panels;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import layout.entities.Rol;
+
+
 /**
  *
  * @author  Administrador
  */
 public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
+    private Integer idUsuario;
     
     /** Creates new form JPanelConsultarEstadoSector */
     public JPanelConsultarEstadoSector() {
+        initComponents();
+        extraInitComponents();
+    }
+    
+     public JPanelConsultarEstadoSector(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+        
         initComponents();
         extraInitComponents();
     }
@@ -29,12 +42,13 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxSector = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonConsultar = new javax.swing.JButton();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        jLabelErrorSector = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -49,11 +63,12 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText("Consultas de Estado Sector");
 
         jLabel2.setText("Sector");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSector.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Fecha");
 
@@ -70,7 +85,15 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jButton1.setText("Consultar");
+        jButtonConsultar.setText("Consultar");
+        jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarActionPerformed(evt);
+            }
+        });
+
+        jLabelErrorSector.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErrorSector.setText("jLabel4");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -89,14 +112,17 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
                                 .add(76, 76, 76)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                                    .add(layout.createSequentialGroup()
+                                        .add(jComboBoxSector, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(44, 44, 44)
+                                        .add(jLabelErrorSector)))))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
                     .add(layout.createSequentialGroup()
                         .add(69, 69, 69)
                         .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 284, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .add(170, 170, 170)
-                        .add(jButton1)))
+                        .add(jButtonConsultar)))
                 .addContainerGap(236, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -106,8 +132,9 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
                 .add(jLabel1)
                 .add(22, 22, 22)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel2))
+                    .add(jComboBoxSector, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel2)
+                    .add(jLabelErrorSector))
                 .add(15, 15, 15)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(jLabel3)
@@ -115,27 +142,76 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
                 .add(14, 14, 14)
                 .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 129, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 18, Short.MAX_VALUE)
-                .add(jButton1)
+                .add(jButtonConsultar)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
+        boolean validateOk = validateEstadoSector();
+        if(validateOk) {
+            // TODO llamar al SP SP_GET_ESTADO_ SECTOR(idSector, fechaYhora) y llenar la tabla
+            
+        } 
+    }//GEN-LAST:event_jButtonConsultarActionPerformed
+
     private void extraInitComponents() {
         loadCombos();
+        initLabelsError();
     }
 
+    private void initLabelsError() {
+        jLabelErrorSector.setVisible(false);
+        jLabelErrorSector.setVisible(false);
+    }
+    
     private void loadCombos() {
-       
+       loadComboSector();
+    }
+
+    private void loadComboSector() {
+        //TODO llamar a un SP SP_GET_ROL_USER(INTEGER idUser);
+        Integer idRol = new Integer(1);
+        if(Rol.PRODUCTOR.getIdRol() == idRol.intValue()) {
+            //TODO llamar al SP SP_GET_SECTOR( idProductor)
+            System.out.println("PRODUCTOR");
+        } else if(Rol.ADMINISTRADOR.getIdRol() == idRol.intValue()) {
+            //TODO llamar al SP SP_GET_SECTORES();
+            System.out.println("ADMINISTRADOR");
+        }
+        
+        
+    }
+    
+     private boolean validateEstadoSector() {
+        boolean validate = validateCombo(jComboBoxSector);
+        if(!validate) {
+           putError(jLabelErrorSector, "Debe seleccionar un Sector");
+        } else {
+            jLabelErrorSector.setVisible(false);
+        }
+        return validate;
+    }
+
+    private void putError(JLabel labelError, String messageError) {
+        labelError.setText(messageError);
+        labelError.setVisible(true);
+    }
+
+    private boolean validateCombo(JComboBox jComboBox) {
+        int indexSelected = jComboBox.getSelectedIndex();
+        return indexSelected != 0;
     }
 
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton jButtonConsultar;
+    private javax.swing.JComboBox jComboBoxSector;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelErrorSector;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
