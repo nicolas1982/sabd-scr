@@ -6,15 +6,57 @@
 
 package layout.panels;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import layout.entities.Rol;
+
 /**
  *
  * @author  Administrador
  */
 public class JPanelConsultarFactura extends javax.swing.JPanel {
-    
+    private Integer idUsuario;
     /** Creates new form JPanelConsultarFactura */
     public JPanelConsultarFactura() {
         initComponents();
+        extraInitComponents();
+    }
+    
+     public JPanelConsultarFactura(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+        
+        initComponents();
+        extraInitComponents();
+    }
+    
+    private void extraInitComponents() {
+        loadCombos();
+        initLabelsError();
+    }
+    
+    private void initLabelsError() {
+        jLabelErrorProductor.setVisible(false);
+        jLabelErrorProductor.setVisible(false);
+    }
+    
+    private boolean validateProductor() {
+        boolean validate = validateCombo(jComboBoxProductor);
+        if(!validate) {
+            putError(jLabelErrorProductor, "Debe seleccionar un Productor");
+        } else {
+            jLabelErrorProductor.setVisible(false);
+        }
+        return validate;
+    }
+    
+    private void putError(JLabel labelError, String messageError) {
+        labelError.setText(messageError);
+        labelError.setVisible(true);
+    }
+    
+    private boolean validateCombo(JComboBox jComboBox) {
+        int indexSelected = jComboBox.getSelectedIndex();
+        return indexSelected != 0;
     }
     
     /** This method is called from within the constructor to
@@ -26,18 +68,20 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
     private void initComponents() {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxProductor = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonConsultar = new javax.swing.JButton();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        jLabelErrorProductor = new javax.swing.JLabel();
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText("Consultas de Facturas");
 
         jLabel2.setText("Productor");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Fecha");
 
@@ -54,7 +98,15 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Consultar");
+        jButtonConsultar.setText("Consultar");
+        jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarActionPerformed(evt);
+            }
+        });
+
+        jLabelErrorProductor.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErrorProductor.setText("jLabel4");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -73,13 +125,16 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
                                 .add(83, 83, 83)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
+                                    .add(layout.createSequentialGroup()
+                                        .add(jComboBoxProductor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(43, 43, 43)
+                                        .add(jLabelErrorProductor))))))
                     .add(layout.createSequentialGroup()
                         .add(79, 79, 79)
                         .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 263, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .add(167, 167, 167)
-                        .add(jButton1)))
+                        .add(jButtonConsultar)))
                 .addContainerGap(275, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -90,7 +145,8 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
                 .add(23, 23, 23)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
-                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jComboBoxProductor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabelErrorProductor))
                 .add(20, 20, 20)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel3)
@@ -98,19 +154,48 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
                 .add(13, 13, 13)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 128, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jButton1)
+                .add(jButtonConsultar)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
+        boolean validateOk = validateProductor();
+        if(validateOk) {
+            //TODO
+            //Select * from CabeceraFactura where cfaFecha = fecha and cfaIdProductor = idProductor;
+            //Select * from RenglonFactura where rfaidcabecerafact = idFactura;
+            
+            //llenar la tabla, para que es la fecha?
+            
+        } 
+    }//GEN-LAST:event_jButtonConsultarActionPerformed
     
+    private void loadCombos() {
+        loadComboProductor();
+    }
+    
+    private void loadComboProductor() {
+        //TODO llamar a un SP SP_GET_ROL_USER(INTEGER idUser);
+        Integer idRol = new Integer(1);
+        if(Rol.PRODUCTOR.getIdRol() == idRol.intValue()) {
+            //TODO llamar al SP SP_GET_PRODUCTOR( idProductor)
+            System.out.println("PRODUCTOR");
+        } else if(Rol.ADMINISTRADOR.getIdRol() == idRol.intValue()) {
+            //TODO llamar al SP SP_GET_PRODUCTORES();
+            System.out.println("ADMINISTRADOR");
+        }
+    }
+  
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton jButtonConsultar;
+    private javax.swing.JComboBox jComboBoxProductor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelErrorProductor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
