@@ -6,8 +6,9 @@
 
 package layout.panels;
 
-import com.imagine.component.calendar.CalendarComponent;
 import java.sql.Date;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -39,6 +40,7 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jComboBoxProductor = new javax.swing.JComboBox();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        jLabelErrorProductor = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText("GENERAR FACTURA");
@@ -57,27 +59,35 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
 
         jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabelErrorProductor.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErrorProductor.setText("[errorProductor]");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(31, 31, 31)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
-                    .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel2)
-                            .add(jLabel3))
-                        .add(47, 47, 47)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jComboBoxProductor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(186, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
-                .add(jButtonGenerarFactura)
-                .add(174, 174, 174))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
+                        .add(31, 31, 31)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel1)
+                            .add(layout.createSequentialGroup()
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jLabel2)
+                                    .add(jLabel3))
+                                .add(47, 47, 47)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                        .add(jComboBoxProductor, 0, 117, Short.MAX_VALUE)
+                                        .add(38, 38, 38))))))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap(169, Short.MAX_VALUE)
+                        .add(jButtonGenerarFactura)))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabelErrorProductor)
+                .add(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -91,7 +101,8 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
                 .add(39, 39, 39)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel3)
-                    .add(jComboBoxProductor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jComboBoxProductor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabelErrorProductor))
                 .add(53, 53, 53)
                 .add(jButtonGenerarFactura)
                 .addContainerGap(61, Short.MAX_VALUE))
@@ -99,11 +110,19 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGenerarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarFacturaActionPerformed
-        // TODO llamar al SP SP_FAC_PROD( p_mesFactura date, p_idProductor int);
+        boolean validateOk = validarGenerarFactura();
+        if(validateOk) {
+            // TODO llamar al SP SP_FAC_PROD( p_mesFactura date, p_idProductor int);
+        } 
     }//GEN-LAST:event_jButtonGenerarFacturaActionPerformed
 
     private void extraInitComponents() {
         loadCombos();   
+        initLabelsError();
+    }
+    
+    private void initLabelsError() {
+        jLabelErrorProductor.setVisible(false);
     }
 
     private void loadCombos() {
@@ -113,7 +132,26 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
     private void loadComboProductor() {
         //TODO llamar al SP SP_GET_PRODUCTORES();
     }
+
+    private boolean validarGenerarFactura() {
+        boolean validate = validateCombo(jComboBoxProductor);
+        if(!validate) {
+            putError(jLabelErrorProductor, "Debe seleccionar un Productor");
+        } else {
+            jLabelErrorProductor.setVisible(false);
+        }
+        return validate;
+    }
     
+    private void putError(JLabel labelError, String messageError) {
+        labelError.setText(messageError);
+        labelError.setVisible(true);
+    }
+
+    private boolean validateCombo(JComboBox jComboBox) {
+        int indexSelected = jComboBox.getSelectedIndex();
+        return indexSelected != 0;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
@@ -122,6 +160,7 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelErrorProductor;
     // End of variables declaration//GEN-END:variables
     
 }
