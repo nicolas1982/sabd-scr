@@ -171,8 +171,7 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
     private void loadValuesCombos() {
         jComboBoxSector.addItem(new Integer(1));
         jComboBoxSector.addItem(new Integer(2));
-        
-        
+
     }
 
     private boolean validarAltaSensor() {

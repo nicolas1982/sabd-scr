@@ -6,6 +6,9 @@
 
 package layout.panels;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+
 /**
  *
  * @author  Administrador
@@ -29,22 +32,26 @@ public class JPanelRegistroMedicion extends javax.swing.JPanel {
     private void initComponents() {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxProductor = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxSector = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        jComboBoxSensor = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jButtonRegistrarMedicion = new javax.swing.JButton();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        jLabelErrorProductor = new javax.swing.JLabel();
+        jLabelErrorSector = new javax.swing.JLabel();
+        jLabelErrorSensor = new javax.swing.JLabel();
+        jLabelErrorValorMedicion = new javax.swing.JLabel();
 
         jLabel1.setText("Registrar Medici\u00f3n");
 
         jLabel2.setText("Productor");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Sector");
 
@@ -57,7 +64,7 @@ public class JPanelRegistroMedicion extends javax.swing.JPanel {
 
         jLabel4.setText("Sensor");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSensor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel5.setText("Valor Medici\u00f3n");
 
@@ -69,6 +76,18 @@ public class JPanelRegistroMedicion extends javax.swing.JPanel {
                 jButtonRegistrarMedicionActionPerformed(evt);
             }
         });
+
+        jLabelErrorProductor.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErrorProductor.setText("jLabel7");
+
+        jLabelErrorSector.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErrorSector.setText("jLabel8");
+
+        jLabelErrorSensor.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErrorSensor.setText("jLabel9");
+
+        jLabelErrorValorMedicion.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErrorValorMedicion.setText("jLabel10");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -88,11 +107,19 @@ public class JPanelRegistroMedicion extends javax.swing.JPanel {
                         .add(49, 49, 49)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jComboBoxSector, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jComboBox3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jButtonRegistrarMedicion))))
+                            .add(jButtonRegistrarMedicion)
+                            .add(layout.createSequentialGroup()
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                    .add(jComboBoxProductor, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(jComboBoxSector, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(jComboBoxSensor, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(jTextField1))
+                                .add(48, 48, 48)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jLabelErrorValorMedicion)
+                                    .add(jLabelErrorSensor)
+                                    .add(jLabelErrorSector)
+                                    .add(jLabelErrorProductor))))))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,18 +130,25 @@ public class JPanelRegistroMedicion extends javax.swing.JPanel {
                 .add(23, 23, 23)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel2)
-                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jComboBoxProductor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jLabelErrorProductor)))
                 .add(26, 26, 26)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel3)
-                    .add(jComboBoxSector, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jComboBoxSector, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jLabelErrorSector)))
                 .add(28, 28, 28)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel4)
-                    .add(jComboBox3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jComboBoxSensor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jLabelErrorSensor)))
                 .add(29, 29, 29)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel5)
+                    .add(jLabelErrorValorMedicion)
                     .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(28, 28, 28)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
@@ -132,13 +166,25 @@ public class JPanelRegistroMedicion extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBoxSectorActionPerformed
 
     private void jButtonRegistrarMedicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarMedicionActionPerformed
-        // FIXME llamar al SP SP_INSERT_REGISTRO_ MEDICION()
+        
+        boolean validateOk = validarAltaMedicion();
+        if(validateOk) {
+            // FIXME llamar al SP SP_INSERT_REGISTRO_ MEDICION()
+        } 
     }//GEN-LAST:event_jButtonRegistrarMedicionActionPerformed
 
     private void extraInitComponents() {
         loadCombos();
+        initLabelsError();
     }
 
+     private void initLabelsError() {
+        jLabelErrorProductor.setVisible(false);
+        jLabelErrorSector.setVisible(false);
+        jLabelErrorSensor.setVisible(false);
+        jLabelErrorValorMedicion.setVisible(false);
+    }
+    
     private void loadCombos() {
         loadComboProductor();
         loadComboSector();
@@ -156,20 +202,75 @@ public class JPanelRegistroMedicion extends javax.swing.JPanel {
     private void loadComboProductor() {
         //TODO llamar al SP_GET_PRODUCTORES();
     }
+
+    private boolean validarAltaMedicion() {
+        boolean validate = validateProductor() && validateSector() && 
+                            validateSensor() && validarMedicion();
+        return validate;
+    }
+
+    private boolean validateSensor() {
+        boolean validate = validateCombo(jComboBoxSensor);
+        if(!validate) {
+           putError(jLabelErrorSensor, "Debe seleccionar un Sensor");
+        } else {
+            jLabelErrorSensor.setVisible(false);
+        }
+        return validate;
+    }
+
+    private boolean validarMedicion() {
+        //TODO implement!!!
+        return true;
+    }
+
+    private boolean validateProductor() {
+         boolean validate = validateCombo(jComboBoxProductor);
+        if(!validate) {
+           putError(jLabelErrorProductor, "Debe seleccionar un Productor");
+        } else {
+            jLabelErrorProductor.setVisible(false);
+        }
+        return validate;
+    }
+
+    private boolean validateSector() {
+        boolean validate = validateCombo(jComboBoxSector);
+        if(!validate) {
+           putError(jLabelErrorSector, "Debe seleccionar un Sector");
+        } else {
+            jLabelErrorSector.setVisible(false);
+        }
+        return validate;
+    }
+    
+     private void putError(JLabel labelError, String messageError) {
+        labelError.setText(messageError);
+        labelError.setVisible(true);
+    }
+
+    private boolean validateCombo(JComboBox jComboBox) {
+        int indexSelected = jComboBox.getSelectedIndex();
+        return indexSelected != 0;
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private javax.swing.JButton jButtonRegistrarMedicion;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBoxProductor;
     private javax.swing.JComboBox jComboBoxSector;
+    private javax.swing.JComboBox jComboBoxSensor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelErrorProductor;
+    private javax.swing.JLabel jLabelErrorSector;
+    private javax.swing.JLabel jLabelErrorSensor;
+    private javax.swing.JLabel jLabelErrorValorMedicion;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
     
