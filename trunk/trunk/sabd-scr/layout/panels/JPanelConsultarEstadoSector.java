@@ -6,10 +6,14 @@
 
 package layout.panels;
 
+import java.util.Vector;
+
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
 import layout.entities.Rol;
+import scr.dao.SectoresDao;
+import scr.entidades.Sector;
 
 
 
@@ -18,10 +22,16 @@ import layout.entities.Rol;
  * @author  Administrador
  */
 public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
-    private Integer idUsuario;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer idUsuario;
+    private SectoresDao daoSectores;
     
     /** Creates new form JPanelConsultarEstadoSector */
     public JPanelConsultarEstadoSector() {
+    	daoSectores = new SectoresDao();
         initComponents();
         extraInitComponents();
     }
@@ -152,7 +162,8 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
         boolean validateOk = validateEstadoSector();
         if(validateOk) {
-            // TODO llamar al SP SP_GET_ESTADO_ SECTOR(idSector, fechaYhora) y llenar la tabla
+        	Sector sector = (Sector) jComboBoxSector.getSelectedItem();
+        	daoSectores.getEstadoRiego(sector.getIdsector());
             
         } 
     }//GEN-LAST:event_jButtonConsultarActionPerformed
@@ -174,18 +185,26 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
     private void loadComboSector() {
         //TODO llamar a un SP SP_GET_ROL_USER(INTEGER idUser);
         Integer idRol = new Integer(1);
+        
+        Vector <Sector> sectores = null;
         if(Rol.PRODUCTOR.getIdRol() == idRol.intValue()) {
-            //TODO llamar al SP SP_GET_SECTOR( idProductor)
-            System.out.println("PRODUCTOR");
+        	sectores = daoSectores.getSectoresByProductor(idUsuario);//TODO ver si el idUsuario es el idProductor
         } else if(Rol.ADMINISTRADOR.getIdRol() == idRol.intValue()) {
-            //TODO llamar al SP SP_GET_SECTORES();
-            System.out.println("ADMINISTRADOR");
+        	sectores = daoSectores.getSectores();
         }
         
+        jComboBoxSector.addItem(new Sector());//ver!!!
+        loadCombo(sectores);
         
     }
     
-     private boolean validateEstadoSector() {
+     private void loadCombo(Vector<Sector> sectores) {
+		 for (Sector s : sectores) {
+            jComboBoxSector.addItem(s);
+        }
+	}
+
+	private boolean validateEstadoSector() {
         boolean validate = validateCombo(jComboBoxSector);
         if(!validate) {
            putError(jLabelErrorSector, "Debe seleccionar un Sector");
@@ -221,3 +240,4 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     
 }
+

@@ -19,6 +19,7 @@ import scr.entidades.RenglonFactura;
 import scr.entidades.Session;
 
 import layout.entities.Rol;
+import layout.utils.DateUtil;
 
 
 /**
@@ -82,6 +83,7 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButtonConsultar = new javax.swing.JButton();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        dateChooserCombo1.setDateFormat(DateUtil.formatDate);
         jLabelErrorProductor = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
@@ -95,14 +97,14 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null,null},
+                {null, null, null,null},
+                {null, null, null,null},
+                {null, null, null,null}
             },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+            new String [] {"Renglon", "Contrato", "Descripcion", "Monto"
+           }
+            
         ));
         jScrollPane1.setViewportView(jTable1);
 
@@ -182,13 +184,15 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonConsultarActionPerformed
     
     private void loadTabla(Vector renglones){
-    	Object [][] tabla = new Object[renglones.size()][3];
-    	String cabecera[] =new String [] {"fila", "Fecha", "Monto"}; 
+    	String cabecera[] = new String [] {"Renglon", "Contrato", "Descripcion", "Monto"};
+    	Object [][] tabla = new Object[renglones.size()][cabecera.length];
+    	 
     	for (int i = 0; i < renglones.size(); i++)
     	{
     		tabla[i][0] = new Integer(i);
-    		tabla[i][1] = ((RenglonFactura)renglones.get(i)).getFecha();
-    		tabla[i][2] = ((RenglonFactura)renglones.get(i)).getMonto();
+    		tabla[i][1] = ((RenglonFactura)renglones.get(i)).getIdContrato();
+    		tabla[i][2] = ((RenglonFactura)renglones.get(i)).getDescripcion();
+    		tabla[i][3] = ((RenglonFactura)renglones.get(i)).getMonto();
     	}
     	
         jTable1.setModel(new javax.swing.table.DefaultTableModel(tabla, cabecera ));
