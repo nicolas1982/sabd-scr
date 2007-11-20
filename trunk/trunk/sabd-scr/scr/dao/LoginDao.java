@@ -40,7 +40,7 @@ public class LoginDao extends JdbcManager {
 		Usuario usuario = new Usuario();
 		usuario.setId(rs.getInt(0));
 		usuario.setNombre(rs.getString(1));
-		usuario.setIdRol(rs.getString(2));
+		usuario.setIdRol(rs.getInt(2));
 		return usuario;
 	}
 
