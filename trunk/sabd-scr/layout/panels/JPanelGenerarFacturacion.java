@@ -16,8 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import scr.dao.DaoFacturacion;
-import scr.dao.DaoProductores;
+import scr.dao.FacturacionDao;
+import scr.dao.ProductoreDao;
 import scr.entidades.Productor;
 
 import layout.utils.DateUtil;
@@ -133,7 +133,7 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
         	this.dateChooserCombo1.setEnabled(false);
         	String fecha = this.dateChooserCombo1.getText();
         	Productor productor = (Productor)this.jComboBoxProductor.getSelectedItem();
-        	DaoFacturacion dao = new DaoFacturacion();
+        	FacturacionDao dao = new FacturacionDao();
         	boolean resultado;
         	try {
             	// TODO llamar al SP SP_FAC_PROD( p_mesFactura date, p_idProductor int);
@@ -166,7 +166,7 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
     }
 
     private void loadComboProductor() {
-    	DaoProductores dao = new DaoProductores();
+    	ProductoreDao dao = new ProductoreDao();
     	jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(dao.getProductores().toArray()));
     }
 
