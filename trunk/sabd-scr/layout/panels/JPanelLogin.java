@@ -102,10 +102,10 @@ public class JPanelLogin extends javax.swing.JPanel {
     	    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
     	        JOptionPane.ERROR_MESSAGE);
     	}
-    	
     }//GEN-LAST:event_jBAceptarKeyPressed
 
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
+    	jBAceptarKeyPressed(null);
     }//GEN-LAST:event_jBAceptarMouseClicked
     
     

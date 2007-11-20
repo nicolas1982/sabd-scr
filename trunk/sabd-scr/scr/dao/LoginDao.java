@@ -15,12 +15,13 @@ public class LoginDao extends JdbcManager {
 			con = this.getDB2ConnectionFromProperties();
 			
 			/**
-			 * TODO: SELECT PARA BUSCAR USUARIO
+			 * TODO: SELECT PARA BUSCAR USUARIO POR NOMBRE Y PASSWORD
 			 */
 			
 			PreparedStatement cs = con.prepareCall("SP_GET_USUARIOS()");
 			cs.setString(1,nombre);
 			rs = cs.executeQuery();
+			
 			if (!rs.next())
 				return null;
 			return this.rellenarUsuario(rs);
