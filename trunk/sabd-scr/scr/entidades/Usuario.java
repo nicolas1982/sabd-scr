@@ -3,12 +3,12 @@ package scr.entidades;
 public class Usuario {
 	private int id;
 	private String nombre;
-	private String idRol;
+	private int idRol;
 	
-	public String getIdRol() {
+	public int getIdRol() {
 		return idRol;
 	}
-	public void setIdRol(String idRol) {
+	public void setIdRol(int idRol) {
 		this.idRol = idRol;
 	}
 	public String getNombre() {
