@@ -39,5 +39,7 @@ public class Productor {
 	public int getIdDomicilio() {
 		return idDomicilio;
 	}
-
+    public String toString(){
+    	return nombreProductor;
+    }
 }
