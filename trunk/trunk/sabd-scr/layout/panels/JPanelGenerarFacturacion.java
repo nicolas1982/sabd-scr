@@ -11,7 +11,9 @@ import java.text.DateFormat;
 
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import scr.dao.DaoFacturacion;
@@ -127,24 +129,25 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
         boolean validateOk = validarGenerarFactura();
         if(validateOk) {
         	this.jButtonGenerarFactura.setEnabled(false);
-        	this.jComboBoxProductor.setEditable(false);
+        	this.jComboBoxProductor.setEnabled(false);
         	this.dateChooserCombo1.setEnabled(false);
         	String fecha = this.dateChooserCombo1.getText();
         	Productor productor = (Productor)this.jComboBoxProductor.getSelectedItem();
         	DaoFacturacion dao = new DaoFacturacion();
-        	int idFactura;
+        	boolean resultado;
         	try {
             	// TODO llamar al SP SP_FAC_PROD( p_mesFactura date, p_idProductor int);
-        		idFactura = dao.generarFactura(fecha,productor);
-        		JLabel label = new JLabel();
-        		label.setText("Factura cargada: " + idFactura);
-        		JDialog dialog = new JDialog();
-        		dialog.setContentPane(label);
+        		resultado = dao.generarFactura(fecha,productor);
+        		if (resultado) {
+        			JOptionPane.showMessageDialog(new JFrame(), "Factura cargada correctamente", "Dialog",
+        	    	        JOptionPane.INFORMATION_MESSAGE);
+        		}else
+        			JOptionPane.showMessageDialog(new JFrame(), "No se pudo cargar la factura", "Dialog",
+        	    	        JOptionPane.ERROR_MESSAGE);
         	}catch(Exception e){
-        		JLabel label = new JLabel();
-        		label.setText("Error al cargar factura de " + productor + " en la fecha " + fecha);
-        		JDialog dialog = new JDialog();
-        		dialog.setContentPane(label);
+        		JOptionPane.showMessageDialog(new JFrame(), e, "Dialog",
+            	        JOptionPane.ERROR_MESSAGE);
+        		
         	}
         } 
     }//GEN-LAST:event_jButtonGenerarFacturaActionPerformed
@@ -184,7 +187,7 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
 
     private boolean validateCombo(JComboBox jComboBox) {
         int indexSelected = jComboBox.getSelectedIndex();
-        return indexSelected != 0;
+        return indexSelected >= 0;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
