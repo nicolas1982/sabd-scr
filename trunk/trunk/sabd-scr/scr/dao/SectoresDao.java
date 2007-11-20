@@ -9,7 +9,7 @@ import java.util.Vector;
 import scr.entidades.Productor;
 import scr.entidades.Sector;
 
-public class DaoSectores extends JdbcManager {
+public class SectoresDao extends JdbcManager {
 	
 	public Vector getSectores(){
 		Connection conn = null;
