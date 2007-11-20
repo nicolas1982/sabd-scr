@@ -28,7 +28,7 @@ public abstract class JdbcManager {
 		con = DriverManager.getConnection(db2Url,db2User,db2Pass);
 	    return con;
 	}
-
+	/** @deprecated */
 	private Connection getIDSConnection() throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		String dbUrl = "jdbc:informix-sqli://192.168.2.2:1525/grupo01:informixServer=Centauro"; 
@@ -59,7 +59,7 @@ public abstract class JdbcManager {
 			return this.getDB2Connection();
 		}
 	}
-	
+	/** @deprecated */
 	protected Connection getIDSConnectionFromProperties() throws ClassNotFoundException, SQLException {
 		try {
 			Properties props = this.getProperties();
