@@ -7,20 +7,16 @@
 package layout.panels;
 
 import java.sql.Date;
-import java.text.DateFormat;
 
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import scr.dao.FacturacionDao;
-import scr.dao.ProductoreDao;
-import scr.entidades.Productor;
 
 import layout.utils.DateUtil;
+import scr.dao.FacturacionDao;
+import scr.dao.ProductorDao;
+import scr.entidades.Productor;
 
 
 /**
@@ -166,7 +162,7 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
     }
 
     private void loadComboProductor() {
-    	ProductoreDao dao = new ProductoreDao();
+    	ProductorDao dao = new ProductorDao();
     	jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(dao.getProductores().toArray()));
     }
 
