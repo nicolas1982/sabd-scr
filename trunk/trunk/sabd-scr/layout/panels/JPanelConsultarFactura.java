@@ -8,7 +8,7 @@ package layout.panels;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import layout.entities.Rol;
+import layout.enums.Rol;
 
 /**
  *
