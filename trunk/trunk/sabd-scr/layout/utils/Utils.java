@@ -7,7 +7,7 @@ import scr.entidades.Pais;
 
 public class Utils {
 
-	public static Object[] pasarRSAVector(Collection<Pais> collection) {
+	public static Object[] pasarRSAVector(Collection<Object> collection) {
 		Iterator it = collection.iterator();
 		//ver como mierda dimensionar el array
 		//Object[] objArray = ;
