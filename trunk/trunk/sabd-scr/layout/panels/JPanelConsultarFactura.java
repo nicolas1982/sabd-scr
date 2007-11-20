@@ -6,8 +6,16 @@
 
 package layout.panels;
 
+import java.util.Vector;
+
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+
+import scr.dao.DaoFacturacion;
+import scr.dao.DaoProductores;
+import scr.entidades.CabeceraFactura;
+import scr.entidades.Productor;
+import scr.entidades.Session;
 
 import layout.entities.Rol;
 
@@ -17,16 +25,9 @@ import layout.entities.Rol;
  * @author  Administrador
  */
 public class JPanelConsultarFactura extends javax.swing.JPanel {
-    private Integer idUsuario;
     /** Creates new form JPanelConsultarFactura */
-    public JPanelConsultarFactura() {
-        initComponents();
-        extraInitComponents();
-    }
     
-     public JPanelConsultarFactura(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-        
+     public JPanelConsultarFactura() {
         initComponents();
         extraInitComponents();
     }
@@ -58,7 +59,7 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
     
     private boolean validateCombo(JComboBox jComboBox) {
         int indexSelected = jComboBox.getSelectedIndex();
-        return indexSelected != 0;
+        return indexSelected >= 0;
     }
     
     /** This method is called from within the constructor to
@@ -164,12 +165,13 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
         boolean validateOk = validateProductor();
         if(validateOk) {
-            //TODO
-            //Select * from CabeceraFactura where cfaFecha = fecha and cfaIdProductor = idProductor;
-            //Select * from RenglonFactura where rfaidcabecerafact = idFactura;
-            
-            //llenar la tabla, para que es la fecha?
-            
+        	String fecha = this.dateChooserCombo1.getText();
+        	Productor productor = (Productor)this.jComboBoxProductor.getSelectedItem();
+        
+        	DaoFacturacion dao = new DaoFacturacion();
+        	CabeceraFactura cabecera = dao.getCabeceraFactura(fecha,productor.getIdProductor());
+        	Vector renglones = dao.getRenglonesFactura(cabecera.getIdCabecera());
+        	
         } 
     }//GEN-LAST:event_jButtonConsultarActionPerformed
     
@@ -178,13 +180,13 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
     }
     
     private void loadComboProductor() {
-        //TODO llamar a un SP SP_GET_ROL_USER(INTEGER idUser);
-        Integer idRol = new Integer(1);
-        if(Rol.PRODUCTOR.getIdRol() == idRol.intValue()) {
-            //TODO llamar al SP SP_GET_PRODUCTOR( idProductor)
-            System.out.println("PRODUCTOR");
-        } else if(Rol.ADMINISTRADOR.getIdRol() == idRol.intValue()) {
-            //TODO llamar al SP SP_GET_PRODUCTORES();
+        int idRol = Session.getInstance().getUsuario().getIdRol();
+        DaoProductores dao = new DaoProductores();
+        if(Rol.PRODUCTOR.getIdRol() == idRol) {
+        	Productor prod = dao.getProductorDeUnUsuario(Session.getInstance().getUsuario().getId());
+        	jComboBoxProductor.addItem(prod);
+        } else if(Rol.ADMINISTRADOR.getIdRol() == idRol) {
+        	jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(dao.getProductores().toArray()));        	
             System.out.println("ADMINISTRADOR");
         }
     }
