@@ -7,9 +7,18 @@
 package layout.panels;
 
 import java.sql.Date;
+import java.text.DateFormat;
+
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import scr.dao.DaoFacturacion;
+import scr.dao.DaoProductores;
+import scr.entidades.Productor;
+
+import layout.utils.DateUtil;
 
 
 /**
@@ -18,7 +27,11 @@ import javax.swing.JPanel;
  */
 public class JPanelGenerarFacturacion extends javax.swing.JPanel {
     
-    private Integer idProductor;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer idProductor;
     private Date fechaFactura;
     
     /** Creates new form JPanelGenerarFacturacion */
@@ -40,6 +53,7 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jComboBoxProductor = new javax.swing.JComboBox();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        dateChooserCombo1.setDateFormat(DateUtil.formatDate);
         jLabelErrorProductor = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
@@ -112,7 +126,26 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
     private void jButtonGenerarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarFacturaActionPerformed
         boolean validateOk = validarGenerarFactura();
         if(validateOk) {
-            // TODO llamar al SP SP_FAC_PROD( p_mesFactura date, p_idProductor int);
+        	this.jButtonGenerarFactura.setEnabled(false);
+        	this.jComboBoxProductor.setEditable(false);
+        	this.dateChooserCombo1.setEnabled(false);
+        	String fecha = this.dateChooserCombo1.getText();
+        	Productor productor = (Productor)this.jComboBoxProductor.getSelectedItem();
+        	DaoFacturacion dao = new DaoFacturacion();
+        	int idFactura;
+        	try {
+            	// TODO llamar al SP SP_FAC_PROD( p_mesFactura date, p_idProductor int);
+        		idFactura = dao.generarFactura(fecha,productor);
+        		JLabel label = new JLabel();
+        		label.setText("Factura cargada: " + idFactura);
+        		JDialog dialog = new JDialog();
+        		dialog.setContentPane(label);
+        	}catch(Exception e){
+        		JLabel label = new JLabel();
+        		label.setText("Error al cargar factura de " + productor + " en la fecha " + fecha);
+        		JDialog dialog = new JDialog();
+        		dialog.setContentPane(label);
+        	}
         } 
     }//GEN-LAST:event_jButtonGenerarFacturaActionPerformed
 
@@ -130,7 +163,8 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
     }
 
     private void loadComboProductor() {
-        //TODO llamar al SP SP_GET_PRODUCTORES();
+    	DaoProductores dao = new DaoProductores();
+    	jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(dao.getProductores().toArray()));
     }
 
     private boolean validarGenerarFactura() {
