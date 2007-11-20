@@ -1,6 +1,7 @@
 package scr.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -74,6 +75,32 @@ public class ProductorDao extends JdbcManager {
 			this.cerrarConexion(conn,rs);
 		}
 		return null;
+	}
+	
+	public int altaProductor(Productor productor) {
+		ResultSet rs = null;
+		Connection con = null;
+		try{
+			con = this.getDB2ConnectionFromProperties();
+			
+			/**
+			 * TODO: INSERT DEL PRODUCTOR
+			 */
+			
+			PreparedStatement cs = con.prepareCall("SP_GET_PROVINCIAS()");
+			rs = cs.executeQuery();
+		}catch(SQLException sqlex){
+			System.out.println("Could not insert Productor, cause: " + sqlex.getMessage());
+		}
+		catch(Exception ex){
+			System.out.println("Error, cause: " + ex.getMessage());
+		}finally{
+			cerrarConexion(con,rs);
+		}
+		/**
+		 * TODO: ver como devuelvo el id que me acaba de generar la base
+		 */
+		return 0;
 	}
 	
 	

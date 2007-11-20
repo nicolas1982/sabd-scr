@@ -1,8 +1,12 @@
 package layout.panels;
 
+import scr.dao.DomicilioDao;
 import scr.dao.PaisDao;
+import scr.dao.ProductorDao;
 import scr.dao.ProvinciaDao;
+import scr.entidades.Domicilio;
 import scr.entidades.Pais;
+import scr.entidades.Productor;
 import scr.entidades.Provincia;
 
 /**
@@ -14,6 +18,8 @@ public class JPanelAltaProductor extends javax.swing.JPanel {
     private static final long serialVersionUID = -6014959205712574902L;
     private PaisDao paisDAO = new PaisDao();
     private ProvinciaDao provinciaDao = new ProvinciaDao();
+    private DomicilioDao domicilioDao = new DomicilioDao();
+    private ProductorDao productorDao = new ProductorDao();
 	
     /** Creates new form JPanelAltaProductor */
     public JPanelAltaProductor() {
@@ -169,11 +175,28 @@ public class JPanelAltaProductor extends javax.swing.JPanel {
     }//GEN-LAST:event_jBCancelarMouseClicked
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
-    	
+    	int idDom = domicilioDao.altaDomicilio(this.getDomicilio());
+    	Productor productor = this.getProductor();
+    	productor.setIdDomicilio(idDom);
+    	productorDao.altaProductor(productor);
     }//GEN-LAST:event_jBAceptarKeyPressed
 
-    private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
-// TODO: Agrege su codigo aqui:
+    private Domicilio getDomicilio() {
+    	/**
+    	 * TODO: ARREGLAR ESTO!!!
+    	 */
+		//this.jCBProv.get
+		return null;
+	}
+
+	private Productor getProductor() {
+    	Productor productor = new Productor();
+    	productor.setNombre(this.jTFNombre.getText());
+		return productor;
+	}
+
+	private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
+    	this.jBAceptarKeyPressed(null);
     }//GEN-LAST:event_jBAceptarMouseClicked
     
     
