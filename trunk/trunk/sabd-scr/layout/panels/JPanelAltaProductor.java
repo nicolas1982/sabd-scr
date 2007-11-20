@@ -1,5 +1,9 @@
 package layout.panels;
 
+import layout.utils.Utils;
+import scr.dao.PaisDao;
+import scr.entidades.Pais;
+
 /**
  *
  * @author  ZIGGY STARDUST
@@ -7,6 +11,7 @@ package layout.panels;
 public class JPanelAltaProductor extends javax.swing.JPanel {
     
     private static final long serialVersionUID = -6014959205712574902L;
+    private PaisDao paisDAO = new PaisDao();
 	
     /** Creates new form JPanelAltaProductor */
     public JPanelAltaProductor() {
@@ -74,8 +79,9 @@ public class JPanelAltaProductor extends javax.swing.JPanel {
                 jBCancelarMouseClicked(evt);
             }
         });
-
-        jCBPais.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
+        
+        Pais[] paises = Utils.pasarRSAVector(this.paisDAO.buscarTodos());
+        jCBPais.setModel(new javax.swing.DefaultComboBoxModel();
 
         jCBProv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
 
@@ -152,15 +158,15 @@ public class JPanelAltaProductor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBCancelarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarKeyPressed
 
     private void jBCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBCancelarMouseClicked
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarMouseClicked
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	
     }//GEN-LAST:event_jBAceptarKeyPressed
 
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
