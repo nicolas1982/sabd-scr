@@ -11,7 +11,11 @@ public class CabeceraFactura {
 		return fecha;
 	}
 	public void setFecha(Date fecha) {
-		this.fecha = fecha.toString();
+		String dameputafecha = fecha.toString();
+		String anio = dameputafecha.substring(0,4);
+		String dia = dameputafecha.substring(5,7);
+		String mes = dameputafecha.substring(8,10);
+		this.fecha = dia + "/" + mes + "/" + anio;
 	}
 	public int getIdCabecera() {
 		return idCabecera;
