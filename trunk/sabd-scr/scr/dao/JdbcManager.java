@@ -47,7 +47,7 @@ public abstract class JdbcManager {
 			String db2Url = props.getProperty("db2Url");
 			String db2User = props.getProperty("db2User");
 			String db2Pass = props.getProperty("db2Pass");
-			String driverDB2ClassName ="driverDB2ClassName" ; 
+			String driverDB2ClassName = props.getProperty("driverDB2ClassName"); 
 			Class.forName(driverDB2ClassName) ;
 			con = DriverManager.getConnection(db2Url,db2User,db2Pass);
 		    return con;
@@ -94,10 +94,10 @@ public abstract class JdbcManager {
 	{
 		try
 		{
-			if ( conn != null )
-				conn.close();
 			if ( rs != null )
 				rs.close();
+			if ( conn != null )
+				conn.close();
 		}
 		catch ( SQLException e )
 		{System.out.println("Problemas al cerrar conexion: " + e.getMessage());}			
