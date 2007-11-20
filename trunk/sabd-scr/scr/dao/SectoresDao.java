@@ -1,17 +1,18 @@
 package scr.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.Vector;
 
-import scr.entidades.Productor;
 import scr.entidades.Sector;
 
 public class SectoresDao extends JdbcManager {
 	
-	public Vector getSectores(){
+	public Vector<Sector> getSectores(){
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
@@ -36,7 +37,7 @@ public class SectoresDao extends JdbcManager {
 		return null;
 	}
 	
-	public Vector getSectoresByProductor(Integer idProductor){
+	public Vector<Sector> getSectoresByProductor(Integer idProductor){
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
@@ -61,8 +62,8 @@ public class SectoresDao extends JdbcManager {
 		return null;
 	}
 	
-	private Vector buildSectoresFromResultSet(ResultSet rs) throws SQLException{
-		Vector vec = new Vector();
+	private Vector<Sector> buildSectoresFromResultSet(ResultSet rs) throws SQLException{
+		Vector<Sector> vec =  new Vector<Sector>();
 		Sector sector;
 		
 		while(rs.next()) {
@@ -80,6 +81,47 @@ public class SectoresDao extends JdbcManager {
 		return vec;
 	}
 	
+//	create function fun_get_estado_riego(idSector integer)
+//	returning smallint;
+//		define p_ret smallint;
+//		call sp_get_estado_riego(idSector) returning p_ret;
+//		return p_ret;
+//	end function;
+	public Short getEstadoRiego(Integer idSector) {
+		Connection conn = null;
+		Short retValue;
+		ResultSet rs = null;
+		try {
+		conn = this.getDB2ConnectionFromProperties();
+		
+		CallableStatement callableStatement = conn.prepareCall("{? = call fun_get_estado_riego(?)}");
+		
+	    // Register the type of the return value
+		callableStatement.registerOutParameter(1, Types.SMALLINT);
+		
+		// Set the value for the IN parameter
+		callableStatement.setInt(2, idSector);
+        
+		//Execute and retrieve the returned value
+		callableStatement.execute();
+		
+        retValue = callableStatement.getShort(1);
+		
+		return retValue;
+		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			this.cerrarConexion(conn,rs);
+		}
+		return null;
+	}
+	
 	
 }
+
 
