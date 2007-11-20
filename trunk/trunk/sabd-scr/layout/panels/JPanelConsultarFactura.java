@@ -11,10 +11,11 @@ import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import scr.dao.DaoFacturacion;
-import scr.dao.DaoProductores;
+import scr.dao.FacturacionDao;
+import scr.dao.ProductorDao;
 import scr.entidades.CabeceraFactura;
 import scr.entidades.Productor;
+import scr.entidades.RenglonFactura;
 import scr.entidades.Session;
 
 import layout.entities.Rol;
@@ -25,7 +26,11 @@ import layout.entities.Rol;
  * @author  Administrador
  */
 public class JPanelConsultarFactura extends javax.swing.JPanel {
-    /** Creates new form JPanelConsultarFactura */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/** Creates new form JPanelConsultarFactura */
     
      public JPanelConsultarFactura() {
         initComponents();
@@ -167,21 +172,38 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
         if(validateOk) {
         	String fecha = this.dateChooserCombo1.getText();
         	Productor productor = (Productor)this.jComboBoxProductor.getSelectedItem();
-        
-        	DaoFacturacion dao = new DaoFacturacion();
+        	FacturacionDao dao = new FacturacionDao();
         	CabeceraFactura cabecera = dao.getCabeceraFactura(fecha,productor.getIdProductor());
         	Vector renglones = dao.getRenglonesFactura(cabecera.getIdCabecera());
-        	
+        	loadTabla(renglones);
+        	jLabelErrorProductor.setText("TOTAL: $ " + cabecera.getMontototal());
+        	jLabelErrorProductor.setVisible(true);
         } 
     }//GEN-LAST:event_jButtonConsultarActionPerformed
+    
+    private void loadTabla(Vector renglones){
+    	Object [][] tabla = new Object[renglones.size()][3];
+    	String cabecera[] =new String [] {"fila", "Fecha", "Monto"}; 
+    	for (int i = 0; i < renglones.size(); i++)
+    	{
+    		tabla[i][0] = new Integer(i);
+    		tabla[i][1] = ((RenglonFactura)renglones.get(i)).getFecha();
+    		tabla[i][2] = ((RenglonFactura)renglones.get(i)).getMonto();
+    	}
+    	
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(tabla, cabecera ));
+        jScrollPane1.setViewportView(jTable1);
+    	
+    }
     
     private void loadCombos() {
         loadComboProductor();
     }
-    
+    /** TODO hay que descomentar idRol! */
     private void loadComboProductor() {
-        int idRol = Session.getInstance().getUsuario().getIdRol();
-        DaoProductores dao = new DaoProductores();
+    	//int idRol = Session.getInstance().getUsuario().getIdRol();
+    	int idRol = 1;
+        ProductorDao dao = new ProductorDao();
         if(Rol.PRODUCTOR.getIdRol() == idRol) {
         	Productor prod = dao.getProductorDeUnUsuario(Session.getInstance().getUsuario().getId());
         	jComboBoxProductor.addItem(prod);
