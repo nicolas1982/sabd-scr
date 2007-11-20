@@ -8,7 +8,8 @@ package layout.panels;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import layout.enums.TipoSensor;
+
+import layout.entities.TipoSensor;
 
 /**
  *

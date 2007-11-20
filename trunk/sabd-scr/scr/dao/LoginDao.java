@@ -8,12 +8,16 @@ import java.sql.SQLException;
 import scr.entidades.Usuario;
 
 public class LoginDao extends JdbcManager {
-	public Usuario buscarPorNombre(String nombre){ 
+	public Usuario buscarPorNombreYPass(String nombre, String pass){ 
 		ResultSet rs = null;
 		Connection con = null;
 		try{
-			con = this.getIDSConnectionFromProperties();
-			// Hay que crear este SP
+			con = this.getDB2ConnectionFromProperties();
+			
+			/**
+			 * TODO: SELECT PARA BUSCAR USUARIO
+			 */
+			
 			PreparedStatement cs = con.prepareCall("SP_GET_USUARIOS()");
 			cs.setString(1,nombre);
 			rs = cs.executeQuery();
