@@ -10,7 +10,7 @@ public class Productor {
 		
 	}
 
-	public void setDomicilio(int id) {
+	public void setIdDomicilio(int id) {
 		this.idDomicilio = id;
 		
 	}
@@ -18,6 +18,26 @@ public class Productor {
 	public void setNombre(String nombre) {
 		this.nombreProductor = nombre;
 		
+	}
+	
+	public String getString(){
+		return this.nombreProductor;
+	}
+
+	public String getNombreProductor() {
+		return nombreProductor;
+	}
+
+	public void setNombreProductor(String nombreProductor) {
+		this.nombreProductor = nombreProductor;
+	}
+
+	public int getIdProductor() {
+		return idProductor;
+	}
+
+	public int getIdDomicilio() {
+		return idDomicilio;
 	}
 
 }
