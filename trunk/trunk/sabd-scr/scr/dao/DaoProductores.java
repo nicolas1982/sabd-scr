@@ -1,7 +1,6 @@
 package scr.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -41,7 +40,7 @@ public class DaoProductores extends JdbcManager {
 		while(rs.next()) {
 			productor = new Productor();
 			productor.setIdProductor(rs.getInt(1));
-			productor.setDomicilio(rs.getInt(2));
+			productor.setIdDomicilio(rs.getInt(2));
 			productor.setNombre(rs.getString(3));
 			vec.add(productor);
 		}
