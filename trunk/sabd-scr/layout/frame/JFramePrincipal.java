@@ -6,6 +6,8 @@
 
 package layout.frame;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 import layout.panels.JPanelAltaCampo;
@@ -169,16 +171,17 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
         );
+        Dimension dim = new Dimension();
+        dim.setSize(800,600);
+        this.setPreferredSize(dim);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -235,7 +238,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAltaCampoActionPerformed
 
     private void jMenuABMsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuABMsActionPerformed
-// TODO add your handling code here:
+// TODO add your handling code here: Nada no debe hacer nada
     }//GEN-LAST:event_jMenuABMsActionPerformed
 
     private void jMenuItemAltaProductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAltaProductorActionPerformed
