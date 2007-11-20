@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-public class DaoRegistroMedicion extends JdbcManager {
+public class RegistroMedicionDao extends JdbcManager {
 //	create function fun_insert_registro_medicion(idSensor integer, valor float)
 //	returning integer;
 //		define p_ret integer;

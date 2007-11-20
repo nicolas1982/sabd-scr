@@ -11,7 +11,7 @@ import scr.entidades.CabeceraFactura;
 import scr.entidades.Productor;
 import scr.entidades.RenglonFactura;
 
-public class DaoFacturacion extends JdbcManager {
+public class FacturacionDao extends JdbcManager {
 	public boolean generarFactura(String fecha, Productor productor) {
 		Connection conn = null;
 		try {

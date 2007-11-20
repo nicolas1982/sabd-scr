@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import scr.entidades.Productor;
 
-public class DaoProductores extends JdbcManager {
+public class ProductorDao extends JdbcManager {
 	public Vector getProductores(){
 		Connection conn = null;
 		ResultSet rs = null;
