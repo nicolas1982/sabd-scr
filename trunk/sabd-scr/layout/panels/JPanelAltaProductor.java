@@ -2,7 +2,6 @@ package layout.panels;
 
 import java.util.Collection;
 
-import layout.utils.Utils;
 import scr.dao.PaisDao;
 import scr.dao.ProvinciaDao;
 import scr.entidades.Pais;
@@ -86,10 +85,10 @@ public class JPanelAltaProductor extends javax.swing.JPanel {
             }
         });
         
-        Pais[] paises = Utils.pasarRSAVector((Collection<Object>)this.paisDAO.buscarTodos());
+        Pais[] paises = (Pais[])this.paisDAO.buscarTodos().toArray();
         jCBPais.setModel(new javax.swing.DefaultComboBoxModel(paises));
 
-        Provincia[] provincias = (Provincia[]) Utils.pasarRSAVector((Collection<Object>)this.provinciaDao.buscarTodos());
+        Provincia[] provincias = (Provincia[])this.provinciaDao.buscarTodos().toArray();
         jCBProv.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
