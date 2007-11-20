@@ -1,5 +1,10 @@
 package layout.panels;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import scr.dao.LoginDao;
+
 /**
  *
  * @author  ZIGGY STARDUST
@@ -89,11 +94,18 @@ public class JPanelLogin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
-        //TODO: click en aceptar, tenemos q validar el usuario
+    	LoginDao loginDao = new LoginDao();
+    	if(loginDao.buscarPorNombreYPass(this.jTFUsr.getText(), this.jLPsswd.getText()) != null){
+    		this.setVisible(false);
+    	} else {
+    		String message = "El usuario ingresado es incorrecto";
+    	    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+    	        JOptionPane.ERROR_MESSAGE);
+    	}
+    	
     }//GEN-LAST:event_jBAceptarKeyPressed
 
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
-        //TODO: click en aceptar, tenemos q validar el usuario
     }//GEN-LAST:event_jBAceptarMouseClicked
     
     
