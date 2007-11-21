@@ -1,5 +1,7 @@
 package layout.panels;
 
+import java.util.Vector;
+
 import scr.dao.CondicionDao;
 import scr.dao.SectoresDao;
 import scr.entidades.Condicion;
@@ -51,7 +53,17 @@ public class JPanelAltaCondicion extends javax.swing.JPanel {
 
         jLTipo.setText("Tipo");
 
-        jCBSector.setModel(new javax.swing.DefaultComboBoxModel(sectorDao.getSectores().toArray()));
+        //jCBSector.setModel(new javax.swing.DefaultComboBoxModel(sectorDao.getSectores().toArray()));
+        Vector<Sector>vec = new Vector<Sector>();
+        Sector sector = new Sector();
+        sector.setIdsector(1);
+        sector.setDescripcion("sector 1");
+        vec.add(sector);
+        sector = new Sector();
+        sector.setIdsector(2);
+        sector.setDescripcion("sector 2");
+        vec.add(sector);
+        jCBSector.setModel(new javax.swing.DefaultComboBoxModel(vec));
 
         jCBComparador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
 
@@ -163,7 +175,7 @@ public class JPanelAltaCondicion extends javax.swing.JPanel {
     	 * TODO: ver o que devuelve este selected index
     	 */
     	condicion.setComparador(this.jCBComparador.getSelectedIndex());
-   		condicion.setDiscriminador(this.jCBComparador.getSelectedIndex());
+   		condicion.setDiscriminador(this.jCBTipo.getSelectedIndex());
    		/**
    		 * TODO: agregar campo inicio al formulario.> inicio o fin
    		 */
