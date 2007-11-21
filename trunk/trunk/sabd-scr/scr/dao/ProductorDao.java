@@ -24,10 +24,8 @@ public class ProductorDao extends JdbcManager {
 		return this.buildProductoresFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -66,10 +64,8 @@ public class ProductorDao extends JdbcManager {
 		return this.buildProductorFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -83,7 +79,7 @@ public class ProductorDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		//String query = "INSERT INTO Productor (prIdDomicilio, prNombre) " + 
+		//String query = "INS INTO Productor (prIdDomicilio, prNombre) " + 
 		//				"VALUES (?, ?)";	
 		// la funcion es al reves nombreproductor y despues id dom
 		String query = "{? = call fun_insertar_productor(?,?)}";
@@ -95,10 +91,8 @@ public class ProductorDao extends JdbcManager {
 		rs = cStatement.executeQuery();		
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);

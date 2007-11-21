@@ -27,10 +27,8 @@ public class ProvinciaDao extends JdbcManager {
 		}
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -40,9 +38,9 @@ public class ProvinciaDao extends JdbcManager {
 	
 	private Provincia rellenarProvincia(ResultSet rs) throws SQLException{
 		Provincia provincia = new Provincia();
-		provincia.setId(rs.getInt(0));
-		provincia.setIdPais(rs.getInt(1));
-		provincia.setNombre(rs.getString(2));
+		provincia.setId(rs.getInt(1));
+		provincia.setIdPais(rs.getInt(2));
+		provincia.setNombre(rs.getString(3));
 		return provincia;
 	}
 }

@@ -1,5 +1,6 @@
 package scr.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,21 +15,23 @@ public class CondicionNumericaDao extends JdbcManager {
 		ResultSet rs = null;
 		try {
 		conn = this.getDB2ConnectionFromProperties();
+		/*
+		 * TODO: AGREGAR LA FUNCION A LA BASE
+		 */
+		//String query = "INS INTO CondicionNumerica (cnaValorCondicion, cnaIdTipoCondNum) " + 
+		//				"VALUES (?, ?)";	
+		String query = "{ ? = call fun_insert_condicionNumerica(?,?,?)}";
 		
-		String query = "INSERT INTO CondicionNumerica (cnaValorCondicion, cnaIdTipoCondNum) " + 
-						"VALUES (?, ?)";	
-		
-		PreparedStatement pStatement = conn.prepareStatement(query);
-		pStatement.setFloat(0, condicionNumerica.getValorCondicion());
-		pStatement.setInt(1, condicionNumerica.getTipoCondicionNum());
+		CallableStatement pStatement = conn.prepareCall(query);
+		pStatement.setInt(1, condicionNumerica.getId());
+		pStatement.setFloat(2, condicionNumerica.getValorCondicion());
+		pStatement.setInt(3, condicionNumerica.getTipoCondicionNum());
 		
 		pStatement.executeUpdate();		
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);

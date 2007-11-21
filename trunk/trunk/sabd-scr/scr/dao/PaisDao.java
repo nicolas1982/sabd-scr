@@ -25,10 +25,8 @@ public class PaisDao extends JdbcManager {
 			vec = this.buildPaisesFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -41,8 +39,8 @@ public class PaisDao extends JdbcManager {
 		Pais pais = new Pais();
 		while(rs.next()){
 			pais = new Pais();
-			pais.setId(rs.getInt(0));
-			pais.setNombre(rs.getString(1));
+			pais.setId(rs.getInt(1));
+			pais.setNombre(rs.getString(2));
 			vec.add(pais);
 		}
 		return vec;

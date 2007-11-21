@@ -241,7 +241,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAltaCampoActionPerformed
 
     private void jMenuABMsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuABMsActionPerformed
-// TODO add your handling code here: Nada no debe hacer nada
     }//GEN-LAST:event_jMenuABMsActionPerformed
 
     private void jMenuItemAltaProductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAltaProductorActionPerformed

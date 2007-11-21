@@ -20,19 +20,17 @@ public class LoginDao extends JdbcManager {
 				"WHERE u.uoNombre = ? and u.uoPassword = ? ";
 		
 		PreparedStatement pStatement = conn.prepareStatement(query);
-		pStatement.setString(0, nombre);
-		pStatement.setString(1, password);
+		pStatement.setString(1, nombre);
+		pStatement.setString(2, password);
 		rs = pStatement.executeQuery();		
 		
 		if(rs.next()){
-			usr = this.rellenarUsuario(rs);	
+			usr = this.rellenarUsuario(rs,conn);	
 		}
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -40,14 +38,33 @@ public class LoginDao extends JdbcManager {
 		return usr;
 	}
 	
-	private Usuario rellenarUsuario(ResultSet rs) throws SQLException {
+	private Usuario rellenarUsuario(ResultSet rs, Connection conn) throws SQLException {
 		Usuario usuario = new Usuario();
-		usuario.setId(rs.getInt(0));
-		usuario.setIdProductor(rs.getInt(1));
-		usuario.setNombre(rs.getString(2));
-		
+		usuario.setId(rs.getInt(1));
+		usuario.setIdProductor(rs.getInt(2));
+		usuario.setNombre(rs.getString(3));
+		usuario.setIdRol(this.setRolUsuario(usuario.getId(),conn));
 		return usuario;
 		
+	}
+
+	private int setRolUsuario(int id, Connection conn) {
+		ResultSet rs = null;
+		int idRol = 0;
+		try {
+		String query = "SELECT ruoIdRol FROM rolDeUsuario " +
+				"WHERE ruoIdUsuario = ? ";
+		
+		PreparedStatement pStatement = conn.prepareStatement(query);
+		pStatement.setInt(1, id);
+		rs = pStatement.executeQuery();		
+		if(rs.next()){
+			idRol = rs.getInt(1);
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return idRol;
 	}
 
 }

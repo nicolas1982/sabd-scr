@@ -1,5 +1,6 @@
 package scr.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,25 +17,27 @@ public class CondicionDao extends JdbcManager {
 		ResultSet rs = null;
 		try {
 		conn = this.getDB2ConnectionFromProperties();
+		/*
+		 * TODO: crear fncion inse
+		 */
+//		@todo String query = "INS INTO Condicion (cnIdSector, cnDescripcion, cnComparador," +
+//				" cnDiscriminador, cnInicio) " + 
+//						"VALUES (?, ?, ?, ?, ?)";	
 		
-		String query = "INSERT INTO Condicion (cnIdSector, cnDescripcion, cnComparador," +
-				" cnDiscriminador, cnInicio) " + 
-						"VALUES (?, ?, ?, ?)";	
+		String query = "{ ? = call fun_insert_condicion(?,?,?,?,?)}";
 		
-		PreparedStatement pStatement = conn.prepareStatement(query);
-		pStatement.setInt(0, condicion.getIdSector());
-		pStatement.setString(1, condicion.getDescripcion());
-		pStatement.setInt(2, condicion.getComparador());
-		pStatement.setInt(3, condicion.getDiscriminador());
-		pStatement.setInt(4, condicion.getInicio());
+		CallableStatement cStatement = conn.prepareCall(query);
+		cStatement.setInt(1, condicion.getIdSector());
+		cStatement.setString(2, condicion.getDescripcion());
+		cStatement.setInt(3, condicion.getComparador());
+		cStatement.setInt(4, condicion.getDiscriminador());
+		cStatement.setInt(5, condicion.getInicio());
 		
-		pStatement.executeUpdate();		
+		rs = cStatement.executeQuery();		
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -62,10 +65,8 @@ public class CondicionDao extends JdbcManager {
 				vec.add(this.rellenarCondicion(rs));
 			}
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -75,12 +76,12 @@ public class CondicionDao extends JdbcManager {
 
 	private Condicion rellenarCondicion(ResultSet rs) throws SQLException {
 		Condicion condicion = new Condicion();
-		condicion.setId(rs.getInt(0));
-		condicion.setIdSector(rs.getInt(1));
-		condicion.setDescripcion(rs.getString(2));
-		condicion.setComparador(rs.getInt(3));
-		condicion.setDiscriminador(rs.getInt(4));
-		condicion.setInicio(rs.getInt(5));
+		condicion.setId(rs.getInt(1));
+		condicion.setIdSector(rs.getInt(2));
+		condicion.setDescripcion(rs.getString(3));
+		condicion.setComparador(rs.getInt(4));
+		condicion.setDiscriminador(rs.getInt(5));
+		condicion.setInicio(rs.getInt(6));
 		return condicion;
 	}
 

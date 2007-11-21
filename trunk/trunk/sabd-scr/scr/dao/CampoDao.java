@@ -17,10 +17,8 @@ public class CampoDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		//String query = "INSERT INTO Campo (coIdProductor, coIdDomicilio, coNombre) " + 
-		//				"VALUES (?, ?, ?, ?)";	
 		String query = "{ ? = call fun_insert_campo(?,?,?)}";
-		//fun_insert_campo(idProductor integer, idDomicilio integer, nombre varchar(30))
+		//fun_ins_campo(idProductor integer, idDomicilio integer, nombre varchar(30))
 		CallableStatement cStatement = conn.prepareCall(query);
 		cStatement.setInt(1, campo.getIdProductor());
 		cStatement.setInt(2, campo.getIdDomicilio());
@@ -29,10 +27,8 @@ public class CampoDao extends JdbcManager {
 		rs = cStatement.executeQuery();		
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -53,10 +49,8 @@ public class CampoDao extends JdbcManager {
 			
 			vec = this.buildCamposFromResultSet(rs);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);

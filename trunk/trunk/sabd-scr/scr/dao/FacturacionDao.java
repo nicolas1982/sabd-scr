@@ -25,10 +25,8 @@ public class FacturacionDao extends JdbcManager {
 			this.cerrarConexion(conn);
 			return resultado;
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				this.cerrarConexion(conn);
@@ -51,10 +49,8 @@ public class FacturacionDao extends JdbcManager {
 			this.cerrarConexion(conn);
 			return cabecera;
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				this.cerrarConexion(conn);
@@ -90,10 +86,8 @@ public class FacturacionDao extends JdbcManager {
 			this.cerrarConexion(conn);
 			return vec;
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				this.cerrarConexion(conn);

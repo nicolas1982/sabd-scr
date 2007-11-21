@@ -41,10 +41,8 @@ public class RegistroMedicionDao extends JdbcManager {
 		return retValue;
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -83,10 +81,8 @@ public class RegistroMedicionDao extends JdbcManager {
 		return retValue;
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			this.cerrarConexion(conn,rs);

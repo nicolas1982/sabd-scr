@@ -1,5 +1,6 @@
 package scr.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,20 +15,23 @@ public class CondicionHorariaDao extends JdbcManager {
 		ResultSet rs = null;
 		try {
 		conn = this.getDB2ConnectionFromProperties();
+		/*
+		 * TODO: Agregar esta funcion a la base
+		 */
+		//String query = "INS INTO CondicionHoraria (cnValorCondicion) " + 
+		//				"VALUES (?)";
 		
-		String query = "INSERT INTO CondicionHoraria (cnValorCondicion) " + 
-						"VALUES (?)";	
+		String query = "{ ? = call fun_insert_condicionHoraria(?,?)}";
 		
-		PreparedStatement pStatement = conn.prepareStatement(query);
-		pStatement.setInt(0, condicionHoraria.getValorCondicion());
+		CallableStatement cStatement = conn.prepareCall(query);
+		cStatement.setInt(1, condicionHoraria.getId());
+		cStatement.setInt(2, condicionHoraria.getValorCondicion());
 		
-		pStatement.executeUpdate();		
+		rs = cStatement.executeQuery();		
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
