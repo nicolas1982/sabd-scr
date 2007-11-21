@@ -44,7 +44,7 @@ public class SectoresDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		String query = "SELECT sridsector, sridtipocultivo, sridcontrato, sridcampo, srdescripcion, srfechahorainicio, srfechahorafin, srhectareas FROM sector where sridcampo = coidcampo and coidproductor = pridproductor and pridproductor = idProductor";
+		String query = "SELECT sridsector, sridtipocultivo, sridcontrato, sridcampo, srdescripcion, srfechahorainicio, srfechahorafin, srhectareas FROM sector, campo where sridcampo = coidcampo and coidproductor = "+idProductor;
         
 		Statement statement = conn.createStatement();
 		rs = statement.executeQuery(query);		
@@ -95,18 +95,17 @@ public class SectoresDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		CallableStatement callableStatement = conn.prepareCall("{? = call fun_get_estado_riego(?)}");
+		CallableStatement callableStatement = conn.prepareCall("{call fun_get_estado_riego(?)}");
 		
-	    // Register the type of the return value
-		callableStatement.registerOutParameter(1, Types.SMALLINT);
-		
-		// Set the value for the IN parameter
-		callableStatement.setInt(2, idSector);
+	    // Set the value for the IN parameter
+		callableStatement.setInt(1, idSector);
         
 		//Execute and retrieve the returned value
-		callableStatement.execute();
+		rs = callableStatement.executeQuery();
+		if(rs.next()) rs.getShort(1);
+			retValue = rs.getShort(1);
 		
-        retValue = callableStatement.getShort(1);
+		//retValue = callableStatement.getShort(1);
 		
 		return retValue;
 		
@@ -151,7 +150,6 @@ public class SectoresDao extends JdbcManager {
 			this.cerrarConexion(conn,rs);
 		}
 	}
-	
 	
 }
 
