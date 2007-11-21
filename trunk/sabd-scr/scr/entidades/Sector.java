@@ -62,5 +62,8 @@ public class Sector {
 	public void setSrhectareas(Integer srhectareas) {
 		this.srhectareas = srhectareas;
 	}
+	public String toString(){
+		return this.descripcion;
+	}
 	
 }
