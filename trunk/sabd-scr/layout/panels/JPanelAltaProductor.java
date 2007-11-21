@@ -16,9 +16,6 @@ import scr.entidades.Provincia;
 public class JPanelAltaProductor extends javax.swing.JPanel {
     
     private static final long serialVersionUID = -6014959205712574902L;
-    private PaisDao paisDAO = new PaisDao();
-    private ProvinciaDao provinciaDao = new ProvinciaDao();
-    private DomicilioDao domicilioDao = new DomicilioDao();
     private ProductorDao productorDao = new ProductorDao();
 	
     /** Creates new form JPanelAltaProductor */
@@ -134,23 +131,17 @@ public class JPanelAltaProductor extends javax.swing.JPanel {
     }//GEN-LAST:event_jBCancelarMouseClicked
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
-    	int idDom = domicilioDao.altaDomicilio(this.getDomicilio());
+    	//int idDom = domicilioDao.altaDomicilio(this.getDomicilio());
     	Productor productor = this.getProductor();
-    	productor.setIdDomicilio(idDom);
     	productorDao.altaProductor(productor);
+    	this.setVisible(false);
     }//GEN-LAST:event_jBAceptarKeyPressed
-
-    private Domicilio getDomicilio() {
-    	/**
-    	 * TODO: ARREGLAR ESTO!!!
-    	 */
-		//this.jCBProv.get
-		return null;
-	}
 
 	private Productor getProductor() {
     	Productor productor = new Productor();
     	productor.setNombre(this.jTFNombre.getText());
+    	//HARDCODE
+    	productor.setIdDomicilio(1);
 		return productor;
 	}
 

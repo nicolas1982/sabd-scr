@@ -12,7 +12,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
@@ -27,46 +27,38 @@
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="76" max="32767" attributes="0"/>
+                      <EmptySpace pref="69" max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jTFDescripcion" max="32767" attributes="1"/>
-                      <Component id="jCBContrato" alignment="0" pref="164" max="32767" attributes="1"/>
-                      <Component id="jCBCultivo" alignment="0" max="32767" attributes="1"/>
-                      <Component id="jCBCampo" alignment="0" max="32767" attributes="1"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jTFFFDia" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jTFFIDia" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTFFFMes" min="0" pref="0" max="32767" attributes="1"/>
-                          <Component id="jTFFIMes" alignment="0" pref="28" max="32767" attributes="1"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Component id="jTFFFMes" min="-2" pref="0" max="-2" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jTFFIAnio" alignment="0" max="32767" attributes="1"/>
-                              <Component id="jTFFFAnio" alignment="0" pref="45" max="32767" attributes="1"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="dCCFechaFin" alignment="0" pref="176" max="32767" attributes="0"/>
+                          <Component id="dCCFechaIni" alignment="0" pref="176" max="32767" attributes="1"/>
+                          <Component id="jTFDescripcion" alignment="0" pref="176" max="32767" attributes="1"/>
+                          <Component id="jCBContrato" alignment="0" pref="176" max="32767" attributes="1"/>
+                          <Component id="jCBCultivo" alignment="0" pref="176" max="32767" attributes="1"/>
+                          <Component id="jCBCampo" alignment="0" pref="176" max="32767" attributes="1"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="81" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="jLTitulo" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
@@ -85,30 +77,35 @@
                   <Component id="jCBContrato" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLDescripcion" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="jTFDescripcion" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLDescripcion" min="-2" pref="14" max="-2" attributes="0"/>
+                  <Component id="jTFDescripcion" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLFechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTFFIDia" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTFFIMes" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTFFIAnio" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLFechaInicio" min="-2" max="-2" attributes="0"/>
+                  <Component id="dCCFechaIni" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLFechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTFFFDia" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTFFFMes" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTFFFAnio" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="jTFFFMes" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="jLFechaFin" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="dCCFechaFin" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -190,17 +187,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTFDescripcion">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTFFIDia">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTFFIMes">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTFFIAnio">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTFFFDia">
-    </Component>
     <Component class="javax.swing.JTextField" name="jTFFFMes">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTFFFAnio">
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
@@ -219,6 +206,10 @@
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jButton2KeyPressed"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
       </Events>
+    </Component>
+    <Component class="datechooser.beans.DateChooserCombo" name="dCCFechaIni">
+    </Component>
+    <Component class="datechooser.beans.DateChooserCombo" name="dCCFechaFin">
     </Component>
   </SubComponents>
 </Form>

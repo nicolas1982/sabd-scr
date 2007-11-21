@@ -1,5 +1,10 @@
 package layout.panels;
 
+import scr.dao.CondicionDao;
+import scr.dao.CondicionNumericaDao;
+import scr.entidades.Condicion;
+import scr.entidades.CondicionNumerica;
+
 /**
  *
  * @author  ZIGGY STARDUST
@@ -7,6 +12,9 @@ package layout.panels;
 public class JPanelAltaCondicionNumerica extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = -8454039743612102695L;
+	
+	CondicionDao condicionDao = new CondicionDao();
+	CondicionNumericaDao condicionNumericaDao = new CondicionNumericaDao();
 
 	/** Creates new form JPanelAltaCondNumerica */
     public JPanelAltaCondicionNumerica() {
@@ -34,8 +42,9 @@ public class JPanelAltaCondicionNumerica extends javax.swing.JPanel {
         jLCondicion.setText("Condici\u00f3n");
 
         jLValor.setText("Valor");
-
-        jCBCondicion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
+        
+        Condicion[] condiciones = (Condicion[]) condicionDao.getCondiciones(1).toArray();
+        jCBCondicion.setModel(new javax.swing.DefaultComboBoxModel(condiciones));
 
         jTFValor.setText("jTextField1");
 
@@ -110,19 +119,26 @@ public class JPanelAltaCondicionNumerica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBCancelarMouseClicked
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarMouseClicked
 
     private void jBCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBCancelarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarKeyPressed
 
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
-// TODO: Agrege su codigo aqui:
+    	CondicionNumerica condicionNumerica = new CondicionNumerica();
+    	condicionNumerica.setValorCondicion(new Float(this.jTFValor.getText()).floatValue());
+    	/**
+    	 * TODO: esto lo vamos a definir?
+    	 */
+    	condicionNumerica.setTipoCondicionNum(1);
+    	condicionNumericaDao.insertCondicionNumerica(condicionNumerica);
+    	this.setVisible(false);
     }//GEN-LAST:event_jBAceptarMouseClicked
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.jBAceptarMouseClicked(null);
     }//GEN-LAST:event_jBAceptarKeyPressed
     
     

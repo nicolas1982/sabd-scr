@@ -1,5 +1,11 @@
 package layout.panels;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
+import scr.dao.SectoresDao;
+import scr.entidades.Sector;
+
 /**
  *
  * @author  ZIGGY STARDUST
@@ -8,6 +14,8 @@ public class JPanelAltaSector extends javax.swing.JPanel {
     
 	private static final long serialVersionUID = 6119223212634441001L;
 
+	SectoresDao sectorDao = new SectoresDao();
+	
 	/** Creates new form JPanelAltaSector */
     public JPanelAltaSector() {
         initComponents();
@@ -31,14 +39,10 @@ public class JPanelAltaSector extends javax.swing.JPanel {
         jCBCultivo = new javax.swing.JComboBox();
         jCBContrato = new javax.swing.JComboBox();
         jTFDescripcion = new javax.swing.JTextField();
-        jTFFIDia = new javax.swing.JTextField();
-        jTFFIMes = new javax.swing.JTextField();
-        jTFFIAnio = new javax.swing.JTextField();
-        jTFFFDia = new javax.swing.JTextField();
-        jTFFFMes = new javax.swing.JTextField();
-        jTFFFAnio = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        dCCFechaIni = new datechooser.beans.DateChooserCombo();
+        dCCFechaFin = new datechooser.beans.DateChooserCombo();
 
         jLTitulo.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLTitulo.setText("ALTA SECTOR");
@@ -89,7 +93,7 @@ public class JPanelAltaSector extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(55, 55, 55)
@@ -102,31 +106,25 @@ public class JPanelAltaSector extends javax.swing.JPanel {
                             .add(jLFechaFin))
                         .add(22, 22, 22))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(76, Short.MAX_VALUE)
+                        .addContainerGap(69, Short.MAX_VALUE)
                         .add(jButton1)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLTitulo)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                        .add(jTFDescripcion)
-                        .add(jCBContrato, 0, 164, Short.MAX_VALUE)
-                        .add(jCBCultivo, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jCBCampo, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(jTFFFDia, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jTFFIDia, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(jTFFFMes, 0, 0, Short.MAX_VALUE)
-                            .add(jTFFIMes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                        .add(6, 6, 6)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jButton2)
-                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, jTFFIAnio)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, jTFFFAnio, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)))))
-                .addContainerGap(81, Short.MAX_VALUE))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                .add(84, 84, 84)
+                                .add(jButton2))
+                            .add(dCCFechaFin, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .add(dCCFechaIni, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .add(jTFDescripcion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .add(jCBContrato, 0, 176, Short.MAX_VALUE)
+                            .add(jCBCultivo, 0, 176, Short.MAX_VALUE)
+                            .add(jCBCampo, 0, 176, Short.MAX_VALUE))))
+                .add(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -146,47 +144,65 @@ public class JPanelAltaSector extends javax.swing.JPanel {
                     .add(jLContrato)
                     .add(jCBContrato, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(jLDescripcion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jTFDescripcion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(jLFechaInicio)
-                    .add(jTFFIDia, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jTFFIMes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jTFFIAnio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLFechaFin)
-                    .add(jTFFFDia, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jTFFFMes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jTFFFAnio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(dCCFechaIni, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createSequentialGroup()
+                        .add(18, 18, 18)
+                       )
+                    .add(layout.createSequentialGroup()
+                        .add(14, 14, 14)
+                        .add(jLFechaFin))
+                    .add(layout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(dCCFechaFin, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .add(14, 14, 14)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jButton2)
                     .add(jButton1))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //CANCELAR
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jButton2KeyPressed
-
+    //CANCELAR
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.jButton1MouseClicked(null);
     }//GEN-LAST:event_jButton1KeyPressed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-// TODO: Agrege su codigo aqui:
+    	Sector sector = new Sector();
+    	sector.setDescripcion(this.jTFDescripcion.getText());
+    	/**
+    	 * VER COMO OBTENER DE LOS COMBOS
+    	 */
+    	sector.setIdcampo(1);
+    	sector.setIdcontrato(1);
+    	sector.setIdTipoCultivo(1);
+    	Calendar cal = this.dCCFechaIni.getSelectedDate();
+    	sector.setFechahorainicio(new Timestamp(cal.getTimeInMillis()));
+    	cal = this.dCCFechaFin.getSelectedDate();
+    	sector.setFechahorafin(new Timestamp(cal.getTimeInMillis()));
+    	sectorDao.insertSector(sector);
+    	this.setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
     
     
     // Declaración de varibales -no modificar//GEN-BEGIN:variables
+    private datechooser.beans.DateChooserCombo dCCFechaFin;
+    private datechooser.beans.DateChooserCombo dCCFechaIni;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jCBCampo;
@@ -200,12 +216,6 @@ public class JPanelAltaSector extends javax.swing.JPanel {
     private javax.swing.JLabel jLFechaInicio;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JTextField jTFDescripcion;
-    private javax.swing.JTextField jTFFFAnio;
-    private javax.swing.JTextField jTFFFDia;
-    private javax.swing.JTextField jTFFFMes;
-    private javax.swing.JTextField jTFFIAnio;
-    private javax.swing.JTextField jTFFIDia;
-    private javax.swing.JTextField jTFFIMes;
     // Fin de declaración de variables//GEN-END:variables
     
 }

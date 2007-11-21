@@ -1,5 +1,10 @@
 package layout.panels;
 
+import scr.dao.CampoDao;
+import scr.dao.ProductorDao;
+import scr.entidades.Campo;
+import scr.entidades.Productor;
+
 /**
  *
  * @author  ZIGGY STARDUST
@@ -7,6 +12,9 @@ package layout.panels;
 public class JPanelAltaCampo extends javax.swing.JPanel {
     
 	private static final long serialVersionUID = 4040532380619581418L;
+	
+	private ProductorDao productorDao = new ProductorDao();
+	private CampoDao campoDao = new CampoDao();
 	
 	/** Creates new form JPanelAltaProductor */
     public JPanelAltaCampo() {
@@ -61,8 +69,9 @@ public class JPanelAltaCampo extends javax.swing.JPanel {
         });
 
         jLProductor.setText("Productor");
-
-        jCBProductor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Artículo 1", "Artículo 2", "Artículo 3", "Artículo 4" }));
+        
+        Productor[] productores = (Productor[]) productorDao.getProductores().toArray();
+        jCBProductor.setModel(new javax.swing.DefaultComboBoxModel(productores));
         jCBProductor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBProductorActionPerformed(evt);
@@ -133,21 +142,30 @@ public class JPanelAltaCampo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBCancelarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarKeyPressed
 
     private void jBCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBCancelarMouseClicked
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarMouseClicked
 
-    private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
-// TODO: Agrege su codigo aqui:
-    }//GEN-LAST:event_jBAceptarMouseClicked
-
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.jBAceptarMouseClicked(null);
     }//GEN-LAST:event_jBAceptarKeyPressed
 
+    private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
+    	Campo campo = new Campo();
+    	campo.setHectareas(10);
+    	campo.setIdDomicilio(1);
+    	/**
+    	 * TODO: ver como le pongo el id producto del combo
+    	 */
+    	campo.setIdProductor(1);
+    	campo.setNombre(this.jTFNombre.getText());
+    	campoDao.insertCampo(campo);
+    	this.jBAceptarMouseClicked(null);
+    }//GEN-LAST:event_jBAceptarMouseClicked
+    
     private void jCBProductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBProductorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBProductorActionPerformed
