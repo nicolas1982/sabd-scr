@@ -42,39 +42,24 @@ public class CampoDao extends JdbcManager {
 		Connection conn = null;
 		ResultSet rs = null;
 		Vector<Campo> vec = null;
-//		try {
-//		conn = this.getDB2ConnectionFromProperties();
-//		
-//		String query = "SELECT * FROM Campo";
-//        
-//		Statement statement = conn.createStatement();
-//		rs = statement.executeQuery(query);		
-//		
-//		vec = this.buildCamposFromResultSet(rs);
-//		
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}finally {
-//			this.cerrarConexion(conn,rs);
-//		}
-//		return vec;
-		vec = new Vector<Campo>();
-		Campo campo = new Campo();
-		campo.setId(1);
-		campo.setIdDomicilio(1);
-		campo.setIdProductor(1);
-		campo.setNombre("campo1");
-		vec.add(campo);
-		campo = new Campo();
-		campo.setId(2);
-		campo.setIdDomicilio(2);
-		campo.setIdProductor(2);
-		campo.setNombre("campo2");
-		vec.add(campo);
+		try {
+			conn = this.getDB2ConnectionFromProperties();
+			
+			String query = "SELECT * FROM Campo";
+	        
+			Statement statement = conn.createStatement();
+			rs = statement.executeQuery(query);		
+			
+			vec = this.buildCamposFromResultSet(rs);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.cerrarConexion(conn,rs);
+		}
 		return vec;
 	}
 
