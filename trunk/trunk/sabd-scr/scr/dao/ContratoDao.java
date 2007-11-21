@@ -41,9 +41,9 @@ public class ContratoDao extends JdbcManager {
 		Contrato contrato = null;
 		while(rs.next()){
 			contrato = new Contrato();
-			contrato.setId(rs.getInt(0));
-			contrato.setNombre(rs.getString(1));
-			contrato.setIdTarifa(rs.getInt(2));
+			contrato.setId(rs.getInt(1));
+			contrato.setNombre(rs.getString(2));
+			contrato.setIdTarifa(rs.getInt(3));
 			vec.add(contrato);
 		}
 		return vec;
