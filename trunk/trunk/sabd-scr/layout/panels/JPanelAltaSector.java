@@ -13,7 +13,6 @@ import scr.entidades.Campo;
 import scr.entidades.Contrato;
 import scr.entidades.Sector;
 import scr.entidades.TipoCultivo;
-import scr.entidades.TipoSensor;
 
 /**
  *

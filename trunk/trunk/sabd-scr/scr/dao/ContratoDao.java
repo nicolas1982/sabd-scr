@@ -14,37 +14,25 @@ public class ContratoDao extends JdbcManager {
 		Connection conn = null;
 		ResultSet rs = null;
 		Vector<Contrato> vec = null; 
-//		try {
-//		conn = this.getDB2ConnectionFromProperties();
-//		
-//		String query = "SELECT * FROM Contrato ";
-//        
-//		Statement statement = conn.createStatement();
-//		rs = statement.executeQuery(query);		
-//		
-//		vec = this.buildContratosFromResultSet(rs);
-//		
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}finally {
-//			this.cerrarConexion(conn,rs);
-//		}
-//		return vec;
-		vec = new Vector<Contrato>();
-		Contrato contrato = new Contrato();
-		contrato.setId(1);
-		contrato.setNombre("contrato1");
-		contrato.setIdTarifa(1);
-		vec.add(contrato);
-		contrato = new Contrato();
-		contrato.setId(2);
-		contrato.setNombre("contrato2");
-		contrato.setIdTarifa(2);
-		vec.add(contrato);
+		try {
+		conn = this.getDB2ConnectionFromProperties();
+		
+		String query = "SELECT * FROM Contrato ";
+        
+		Statement statement = conn.createStatement();
+		rs = statement.executeQuery(query);		
+		
+		vec = this.buildContratosFromResultSet(rs);
+		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.cerrarConexion(conn,rs);
+		}
 		return vec;
 	}
 

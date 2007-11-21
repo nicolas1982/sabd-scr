@@ -46,21 +46,21 @@ public class CondicionDao extends JdbcManager {
 		ResultSet rs = null;
 		Vector<Condicion> vec = new Vector<Condicion>();
 		try {
-		conn = this.getDB2ConnectionFromProperties();
-		
-		String query = "SELECT * FROM Condicion c ";
-		
-		if(discriminador == 0){
-			query += "WHERE c.cnDiscriminador == 0 ";
-		} else if(discriminador == 1){
-			query += "WHERE c.cnDiscriminador == 1 ";
-		}
-        
-		Statement statement = conn.createStatement();
-		rs = statement.executeQuery(query);
-		while(rs.next()){
-			vec.add(this.rellenarCondicion(rs));
-		}
+			conn = this.getDB2ConnectionFromProperties();
+			
+			String query = "SELECT * FROM Condicion c ";
+			
+			if(discriminador == 0){
+				query += " WHERE c.cnDiscriminador == 0 ";
+			} else if(discriminador == 1){
+				query += " WHERE c.cnDiscriminador == 1 ";
+			}
+	        
+			Statement statement = conn.createStatement();
+			rs = statement.executeQuery(query);
+			while(rs.next()){
+				vec.add(this.rellenarCondicion(rs));
+			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
