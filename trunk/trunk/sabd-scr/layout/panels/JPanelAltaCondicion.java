@@ -1,5 +1,10 @@
 package layout.panels;
 
+import scr.dao.CondicionDao;
+import scr.dao.SectoresDao;
+import scr.entidades.Condicion;
+import scr.entidades.Sector;
+
 /**
  *
  * @author  ZIGGY STARDUST
@@ -7,6 +12,9 @@ package layout.panels;
 public class JPanelAltaCondicion extends javax.swing.JPanel {
     
 	private static final long serialVersionUID = 2283849863122519093L;
+	
+	CondicionDao condicionDao = new CondicionDao();
+	SectoresDao sectorDao = new SectoresDao();
 
 	/** Creates new form JPanelAltaCondicion */
     public JPanelAltaCondicion() {
@@ -43,11 +51,12 @@ public class JPanelAltaCondicion extends javax.swing.JPanel {
 
         jLTipo.setText("Tipo");
 
-        jCBSector.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
+        Sector[] sectores = (Sector[]) sectorDao.getSectores().toArray();
+        jCBSector.setModel(new javax.swing.DefaultComboBoxModel(sectores));
 
-        jCBComparador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
+        jCBComparador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
 
-        jCBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
+        jCBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Horaria", "Numerica"}));
 
         jBAceptar.setText("Aceptar");
         jBAceptar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -139,19 +148,35 @@ public class JPanelAltaCondicion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBCancelarMouseClicked
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarMouseClicked
 
     private void jBCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBCancelarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarKeyPressed
 
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
-// TODO: Agrege su codigo aqui:
+    	Condicion condicion = new Condicion();
+    	condicion.setDescripcion(this.jTFDescripcion.getText());
+    	/**
+    	 * TODO: ver como obtengo el sector id
+    	 */
+    	condicion.setIdSector(1);
+    	/**
+    	 * TODO: ver o que devuelve este selected index
+    	 */
+    	condicion.setComparador(this.jCBComparador.getSelectedIndex());
+   		condicion.setDiscriminador(this.jCBComparador.getSelectedIndex());
+   		/**
+   		 * TODO: agregar campo inicio al formulario.> inicio o fin
+   		 */
+   		condicion.setInicio(1);
+   		condicionDao.insertCondicion(condicion);
+    	this.setVisible(false);
     }//GEN-LAST:event_jBAceptarMouseClicked
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.jBAceptarMouseClicked(null);
     }//GEN-LAST:event_jBAceptarKeyPressed
     
     

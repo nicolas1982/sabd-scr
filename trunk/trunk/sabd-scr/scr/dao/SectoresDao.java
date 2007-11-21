@@ -2,6 +2,7 @@ package scr.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -119,6 +120,36 @@ public class SectoresDao extends JdbcManager {
 			this.cerrarConexion(conn,rs);
 		}
 		return null;
+	}
+
+	public void insertSector(Sector sector) {
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+		conn = this.getDB2ConnectionFromProperties();
+		
+		String query = "INSERT INTO Sector (srIdTipoCultivo, srIdContrato, srIdCampo, " +
+				"srDescripcion, srFechaHoraInicio, srFechaHoraFin) " + 
+						"VALUES (?, ?, ?, ?, ?, ?)";	
+		
+		PreparedStatement pStatement = conn.prepareStatement(query);
+		pStatement.setInt(0, sector.getIdTipoCultivo());
+		pStatement.setInt(1, sector.getIdcontrato());
+		pStatement.setInt(2, sector.getIdcampo());
+		pStatement.setString(3, sector.getDescripcion());
+		pStatement.setTimestamp(4, sector.getFechahorainicio());
+		pStatement.setTimestamp(5, sector.getFechahorafin());
+		pStatement.executeUpdate();		
+		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.cerrarConexion(conn,rs);
+		}
 	}
 	
 	

@@ -1,5 +1,10 @@
 package layout.panels;
 
+import scr.dao.CondicionDao;
+import scr.dao.CondicionHorariaDao;
+import scr.entidades.Condicion;
+import scr.entidades.CondicionHoraria;
+
 /**
  *
  * @author  ZIGGY STARDUST
@@ -7,6 +12,9 @@ package layout.panels;
 public class JPanelAltaCondicionHoraria extends javax.swing.JPanel {
     
     private static final long serialVersionUID = 1082296173286297574L;
+    
+    CondicionDao condicionDao = new CondicionDao();
+    CondicionHorariaDao condicionHorariaDao = new CondicionHorariaDao();
 	
     /** Creates new form JPanelAltaCondHoraria */
     public JPanelAltaCondicionHoraria() {
@@ -33,7 +41,8 @@ public class JPanelAltaCondicionHoraria extends javax.swing.JPanel {
 
         jLCondicion.setText("Condici\u00f3n");
 
-        jCBCondicion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
+        Condicion[] condiciones = (Condicion[]) condicionDao.getCondiciones(0).toArray();
+        jCBCondicion.setModel(new javax.swing.DefaultComboBoxModel(condiciones));
 
         jLValor.setText("Valor");
 
@@ -108,19 +117,22 @@ public class JPanelAltaCondicionHoraria extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBCancelarMouseClicked
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarMouseClicked
 
     private void jBCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBCancelarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.setVisible(false);
     }//GEN-LAST:event_jBCancelarKeyPressed
 
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
-// TODO: Agrege su codigo aqui:
+    	CondicionHoraria condicionHoraria = new CondicionHoraria();
+    	condicionHoraria.setValorCondicion(new Integer(this.jTFValor.getText()).intValue());
+    	condicionHorariaDao.insertCondicionHoraria(condicionHoraria);
+    	this.setVisible(false);
     }//GEN-LAST:event_jBAceptarMouseClicked
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
-// TODO: Agrege su codigo aqui:
+    	this.jBAceptarMouseClicked(null);
     }//GEN-LAST:event_jBAceptarKeyPressed
     
     
