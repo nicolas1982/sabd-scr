@@ -9,36 +9,35 @@ import java.sql.Statement;
 import scr.entidades.Usuario;
 
 public class LoginDao extends JdbcManager {
-	public Usuario buscarPorNombreYPass(String nombre, String pass){ 
+	public Usuario buscarPorNombreYPass(String nombre, String password){ 
 		Connection conn = null;
 		ResultSet rs = null;
 		Usuario usr = null;
-//		try {
-//		conn = this.getDB2ConnectionFromProperties();
-//		
-//		String query = "SELECT * FROM usuario u" +
-//				"WHERE u.uoNombre = ? and u.uoPassword = ? ";
-//		
-//		PreparedStatement pStatement = conn.prepareStatement(query);
-//		pStatement.setString(0, nombre);
-//		pStatement.setString(1, pass);
-//		rs = pStatement.executeQuery();		
-//		
-//		if(rs.next()){
-//			usr = this.rellenarUsuario(rs);	
-//		}
-//		
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}finally {
-//			this.cerrarConexion(conn,rs);
-//		}
-//		return usr;
-		return null;
+		try {
+		conn = this.getDB2ConnectionFromProperties();
+		
+		String query = "SELECT * FROM usuario u" +
+				"WHERE u.uoNombre = ? and u.uoPassword = ? ";
+		
+		PreparedStatement pStatement = conn.prepareStatement(query);
+		pStatement.setString(0, nombre);
+		pStatement.setString(1, password);
+		rs = pStatement.executeQuery();		
+		
+		if(rs.next()){
+			usr = this.rellenarUsuario(rs);	
+		}
+		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.cerrarConexion(conn,rs);
+		}
+		return usr;
 	}
 	
 	private Usuario rellenarUsuario(ResultSet rs) throws SQLException {
