@@ -176,7 +176,6 @@ public class JPanelAltaCampo extends javax.swing.JPanel {
     }//GEN-LAST:event_jBAceptarMouseClicked
     
     private void jCBProductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBProductorActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jCBProductorActionPerformed
     
     

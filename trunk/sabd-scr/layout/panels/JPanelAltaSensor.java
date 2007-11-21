@@ -9,6 +9,8 @@ package layout.panels;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
+import scr.dao.SectoresDao;
+import scr.dao.SensoresDao;
 import scr.entidades.TipoSensor;
 
 /**
@@ -23,8 +25,6 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
     public JPanelAltaSensor() {
         initComponents();
         extraInitComponents();
-        
-        loadValuesCombos();//TODO sacar cuando esten las llamadas a los SP
     }
     
     /** This method is called from within the constructor to
@@ -126,7 +126,6 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSectorActionPerformed
-        // TODO
         Integer idSector = (Integer) jComboBoxSector.getModel().getSelectedItem();
         this.idSector = idSector;
     }//GEN-LAST:event_jComboBoxSectorActionPerformed
@@ -138,10 +137,9 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
 
     private void jButtonRegistrarSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarSensorActionPerformed
         boolean validateOk = validarAltaSensor();
-        System.out.println("sensor: " + this.tipoSensor);
-        System.out.println("sector: " + this.idSector);
+        SensoresDao sensoresDao = new SensoresDao();
         if(validateOk) {
-            // TODO llamar al SP SP_ALTA_SENSOR(idSector INTEGER, tipoSensor SMALLINT) 
+        	sensoresDao.insertSensor(this.tipoSensor,this.idSector.intValue());
         }         
     }//GEN-LAST:event_jButtonRegistrarSensorActionPerformed
 
@@ -152,7 +150,7 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
 
     private void loadCombos() {
         loadComboTipoSensor();
-        loadComboSector();
+        loadValuesCombos();
     }
 
     private void loadComboTipoSensor() {
@@ -162,14 +160,10 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
         jComboBoxTipoSensor.getModel().setSelectedItem(TipoSensor.SELECCIONE);
     }
 
-    private void loadComboSector() {
-        //TODO llamar al SP SP_GET_SECTORES();
-    }
 
     private void loadValuesCombos() {
-        jComboBoxSector.addItem(new Integer(1));
-        jComboBoxSector.addItem(new Integer(2));
-
+    	SectoresDao sectoresDao = new SectoresDao();
+    	jComboBoxSector.setModel(new javax.swing.DefaultComboBoxModel(sectoresDao.getSectores().toArray()));
     }
 
     private boolean validarAltaSensor() {
@@ -204,7 +198,7 @@ public class JPanelAltaSensor extends javax.swing.JPanel {
 
     private boolean validateCombo(JComboBox jComboBox) {
         int indexSelected = jComboBox.getSelectedIndex();
-        return indexSelected != 0;
+        return indexSelected >= 0;
     }
 
     private void initLabelsError() {

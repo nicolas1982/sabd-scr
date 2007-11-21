@@ -14,10 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import layout.utils.DateUtil;
-
 import scr.dao.SectoresDao;
 import scr.entidades.Rol;
 import scr.entidades.Sector;
+import scr.entidades.Session;
+import scr.entidades.Usuario;
 
 
 
@@ -197,12 +198,12 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
     }
 
     private void loadComboSector() {
-        //TODO llamar a un SP SP_GET_ROL_USER(INTEGER idUser);
-        Integer idRol = new Integer(1);
+        Usuario usuario = Session.getInstance().getUsuario();
+        Integer idRol = new Integer(usuario.getIdRol());
         
         Vector <Sector> sectores = null;
         if(Rol.PRODUCTOR.getIdRol() == idRol.intValue()) {
-        	sectores = daoSectores.getSectoresByProductor(idUsuario);//TODO ver si el idUsuario es el idProductor
+        	sectores = daoSectores.getSectoresByProductor(idUsuario);
         } else if(Rol.ADMINISTRADOR.getIdRol() == idRol.intValue()) {
         	sectores = daoSectores.getSectores();
         }

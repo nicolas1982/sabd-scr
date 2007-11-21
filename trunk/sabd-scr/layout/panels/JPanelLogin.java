@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import scr.dao.LoginDao;
+import scr.entidades.Session;
+import scr.entidades.Usuario;
 
 /**
  *
@@ -104,9 +106,12 @@ public class JPanelLogin extends javax.swing.JPanel {
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
     	this.jBAceptar.setEnabled(false);
     	LoginDao loginDao = new LoginDao();
-    	
-    	if(loginDao.buscarPorNombreYPass(this.jTFUsr.getText(), convertirAString(this.jPPasswd.getPassword())) != null){
-    		this.setVisible(false);
+    	Usuario usuario = loginDao.buscarPorNombreYPass(this.jTFUsr.getText(), convertirAString(this.jPPasswd.getPassword())); 
+    	if(usuario != null){
+    		Session.getInstance().setUsuario(usuario);
+    		String message = "Bienvenido " + usuario.getNombre();
+    	    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+    	        JOptionPane.INFORMATION_MESSAGE);
     		this.setEnabled(false);
     	} else {
     		String message = "El usuario ingresado es incorrecto";
