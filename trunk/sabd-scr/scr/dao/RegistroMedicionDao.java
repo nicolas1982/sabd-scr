@@ -23,16 +23,20 @@ public class RegistroMedicionDao extends JdbcManager {
 		CallableStatement callableStatement = conn.prepareCall("{? = call fun_insert_registro_medicion(?, ?)}");
 		
 	    // Register the type of the return value
-		callableStatement.registerOutParameter(1, Types.INTEGER);
+		//callableStatement.registerOutParameter(1, Types.INTEGER);
 		
 		// Set the value for the IN parameter
-		callableStatement.setInt(2, idSensor);
-		callableStatement.setFloat(3, valor);
+		callableStatement.setInt(1, idSensor);
+		callableStatement.setFloat(2, valor);
         
 		//Execute and retrieve the returned value
-		callableStatement.execute();
+		rs = callableStatement.executeQuery();
 		
-        retValue = callableStatement.getInt(1);
+		if (rs.next()) 
+			retValue = new Integer(rs.getInt(1));
+		else 
+			retValue = new Integer(0);
+        //retValue = callableStatement.getInt(1);
 		
 		return retValue;
 		
