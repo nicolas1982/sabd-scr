@@ -2,6 +2,7 @@ package scr.entidades;
 
 public class Usuario {
 	private int id;
+	private int idProductor;
 	private String nombre;
 	private int idRol;
 	
@@ -25,5 +26,11 @@ public class Usuario {
 	}
 	public String toString(){
 		return this.nombre;
+	}
+	public int getIdProductor() {
+		return idProductor;
+	}
+	public void setIdProductor(int idProductor) {
+		this.idProductor = idProductor;
 	}
 }

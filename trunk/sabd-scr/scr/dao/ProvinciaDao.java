@@ -1,44 +1,41 @@
 package scr.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.sql.Statement;
+import java.util.Vector;
 
 import scr.entidades.Provincia;
 
 public class ProvinciaDao extends JdbcManager {
 	
-	@SuppressWarnings("finally")
-	public Collection<Provincia> buscarTodos(){
+	public Vector<Provincia> buscarTodos(){
+		Connection conn = null;
 		ResultSet rs = null;
-		Connection con = null;
-		Collection<Provincia> provincias = new ArrayList<Provincia>();
-		try{
-			con = this.getDB2ConnectionFromProperties();
-			
-			/**
-			 * TODO: SELECT PARA BUSCAR TODAS LAS PROVINCIAS
-			 */
-			
-			PreparedStatement cs = con.prepareCall("SP_GET_PROVINCIAS()");
-			rs = cs.executeQuery();
-			while(rs.next()){
-				provincias.add(this.rellenarProvincia(rs));
-			}
-		}catch(SQLException sqlex){
-			System.out.println("Can not retrive Provincias, cause: " + sqlex.getMessage());
-			return null;
+		Vector<Provincia>vec = new Vector<Provincia>();
+		try {
+		conn = this.getDB2ConnectionFromProperties();
+		
+		String query = "SELECT * FROM Provincia ";
+		
+		Statement statement = conn.createStatement();
+		rs = statement.executeQuery(query);		
+		
+		if(rs.next()){
+			vec.add(this.rellenarProvincia(rs));	
 		}
-		catch(Exception ex){
-			System.out.println("Error, cause: " + ex.getMessage());
-			return null;
-		}finally{
-			cerrarConexion(con,rs);
-			return provincias;
+		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.cerrarConexion(conn,rs);
 		}
+		return vec;
 	}
 	
 	private Provincia rellenarProvincia(ResultSet rs) throws SQLException{

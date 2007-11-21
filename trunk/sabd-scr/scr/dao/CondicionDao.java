@@ -5,8 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Vector;
 
 import scr.entidades.Condicion;
 
@@ -42,11 +41,10 @@ public class CondicionDao extends JdbcManager {
 		}
 	}
 
-	@SuppressWarnings("finally")
-	public Collection<Condicion> getCondiciones(int discriminador) {
+	public Vector<Condicion> getCondiciones(int discriminador) {
 		Connection conn = null;
 		ResultSet rs = null;
-		Collection<Condicion> condiciones = new ArrayList<Condicion>();
+		Vector<Condicion> vec = new Vector<Condicion>();
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
@@ -61,7 +59,7 @@ public class CondicionDao extends JdbcManager {
 		Statement statement = conn.createStatement();
 		rs = statement.executeQuery(query);
 		while(rs.next()){
-			condiciones.add(this.rellenarCondicion(rs));
+			vec.add(this.rellenarCondicion(rs));
 		}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -71,8 +69,8 @@ public class CondicionDao extends JdbcManager {
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
-			return condiciones;
 		}
+		return vec;
 	}
 
 	private Condicion rellenarCondicion(ResultSet rs) throws SQLException {
