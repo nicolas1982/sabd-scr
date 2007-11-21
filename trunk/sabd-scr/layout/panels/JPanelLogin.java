@@ -105,6 +105,9 @@ public class JPanelLogin extends javax.swing.JPanel {
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
     	this.jBAceptar.setEnabled(false);
     	LoginDao loginDao = new LoginDao();
+    	/**
+    	 * TODO: ver lo del pass
+    	 */
     	if(loginDao.buscarPorNombreYPass(this.jTFUsr.getText(), this.jPPasswd.toString()) != null){
     		this.setVisible(false);
     	} else {
