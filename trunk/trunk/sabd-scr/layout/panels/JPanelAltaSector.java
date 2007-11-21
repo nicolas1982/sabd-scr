@@ -1,10 +1,15 @@
 package layout.panels;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
 import scr.dao.SectoresDao;
+import scr.entidades.Campo;
+import scr.entidades.Contrato;
 import scr.entidades.Sector;
+import scr.entidades.TipoSensor;
 
 /**
  *
@@ -167,15 +172,22 @@ public class JPanelAltaSector extends javax.swing.JPanel {
                     .add(jButton1))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
+        Dimension dim = new Dimension();
+        dim.setSize(500,400);
+        this.setPreferredSize(dim);
+        this.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.setAlignmentY(Component.CENTER_ALIGNMENT);
     }// </editor-fold>//GEN-END:initComponents
 
     //CANCELAR
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
     	this.setVisible(false);
+    	this.setEnabled(false);
     }//GEN-LAST:event_jButton2KeyPressed
     //CANCELAR
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
     	this.setVisible(false);
+    	this.setEnabled(false);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
@@ -188,8 +200,11 @@ public class JPanelAltaSector extends javax.swing.JPanel {
     	/**
     	 * VER COMO OBTENER DE LOS COMBOS
     	 */
-    	sector.setIdcampo(1);
-    	sector.setIdcontrato(1);
+    	Campo campo = (Campo) this.jCBCampo.getSelectedItem();
+    	sector.setIdcampo(campo.getId());
+    	Contrato contrato = (Contrato) this.jCBContrato.getSelectedItem();
+    	sector.setIdcontrato(contrato.getId());
+    	
     	sector.setIdTipoCultivo(1);
     	Calendar cal = this.dCCFechaIni.getSelectedDate();
     	sector.setFechahorainicio(new Timestamp(cal.getTimeInMillis()));
@@ -197,6 +212,7 @@ public class JPanelAltaSector extends javax.swing.JPanel {
     	sector.setFechahorafin(new Timestamp(cal.getTimeInMillis()));
     	sectorDao.insertSector(sector);
     	this.setVisible(false);
+    	this.setEnabled(false);
     }//GEN-LAST:event_jButton1MouseClicked
     
     

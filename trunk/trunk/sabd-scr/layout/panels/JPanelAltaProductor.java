@@ -1,5 +1,8 @@
 package layout.panels;
 
+import java.awt.Component;
+import java.awt.Dimension;
+
 import scr.dao.ProductorDao;
 import scr.entidades.Productor;
 
@@ -114,14 +117,21 @@ public class JPanelAltaProductor extends javax.swing.JPanel {
                     .add(jBAceptar))
                 .add(41, 41, 41))
         );
+        Dimension dim = new Dimension();
+        dim.setSize(500,400);
+        this.setPreferredSize(dim);
+        this.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.setAlignmentY(Component.CENTER_ALIGNMENT);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBCancelarKeyPressed
     	this.setVisible(false);
+    	this.setEnabled(false);
     }//GEN-LAST:event_jBCancelarKeyPressed
 
     private void jBCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBCancelarMouseClicked
     	this.setVisible(false);
+    	this.setEnabled(false);
     }//GEN-LAST:event_jBCancelarMouseClicked
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
@@ -129,6 +139,7 @@ public class JPanelAltaProductor extends javax.swing.JPanel {
     	Productor productor = this.getProductor();
     	productorDao.altaProductor(productor);
     	this.setVisible(false);
+    	this.setEnabled(false);
     }//GEN-LAST:event_jBAceptarKeyPressed
 
 	private Productor getProductor() {

@@ -108,8 +108,9 @@ public class JPanelLogin extends javax.swing.JPanel {
     	/**
     	 * TODO: ver lo del pass
     	 */
-    	if(loginDao.buscarPorNombreYPass(this.jTFUsr.getText(), this.jPPasswd.toString()) != null){
+    	if(loginDao.buscarPorNombreYPass(this.jTFUsr.getText(), convertirAString(this.jPPasswd.getPassword())) != null){
     		this.setVisible(false);
+    		this.setEnabled(false);
     	} else {
     		String message = "El usuario ingresado es incorrecto";
     	    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
@@ -120,7 +121,16 @@ public class JPanelLogin extends javax.swing.JPanel {
     	}
     }//GEN-LAST:event_jBAceptarKeyPressed
 
-    private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
+    private String convertirAString(char[] password) {
+		int i = 0;
+		String pass = "";
+		for(i = 0; i < password.length; i++){
+			pass += password[i];
+		}
+		return pass;
+	}
+
+	private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
     	jBAceptarKeyPressed(null);
     }//GEN-LAST:event_jBAceptarMouseClicked
     

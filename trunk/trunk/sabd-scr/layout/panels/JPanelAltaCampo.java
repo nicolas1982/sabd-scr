@@ -1,5 +1,10 @@
 package layout.panels;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import scr.dao.CampoDao;
 import scr.dao.ProductorDao;
 import scr.entidades.Campo;
@@ -70,6 +75,9 @@ public class JPanelAltaCampo extends javax.swing.JPanel {
 
         jLProductor.setText("Productor");
         
+        /**
+         * TODO: corregir lo de generics
+         */
         Productor[] productores = (Productor[]) productorDao.getProductores().toArray();
         jCBProductor.setModel(new javax.swing.DefaultComboBoxModel(productores));
         jCBProductor.addActionListener(new java.awt.event.ActionListener() {
@@ -139,14 +147,21 @@ public class JPanelAltaCampo extends javax.swing.JPanel {
                     .add(jBAceptar))
                 .add(34, 34, 34))
         );
+        Dimension dim = new Dimension();
+        dim.setSize(500,400);
+        this.setPreferredSize(dim);
+        this.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.setAlignmentY(Component.CENTER_ALIGNMENT);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBCancelarKeyPressed
     	this.setVisible(false);
+    	this.setEnabled(false);
     }//GEN-LAST:event_jBCancelarKeyPressed
 
     private void jBCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBCancelarMouseClicked
     	this.setVisible(false);
+    	this.setEnabled(false);
     }//GEN-LAST:event_jBCancelarMouseClicked
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
@@ -157,13 +172,12 @@ public class JPanelAltaCampo extends javax.swing.JPanel {
     	Campo campo = new Campo();
     	campo.setHectareas(10);
     	campo.setIdDomicilio(1);
-    	/**
-    	 * TODO: ver como le pongo el id producto del combo
-    	 */
-    	campo.setIdProductor(1);
+    	Productor productor = (Productor) this.jCBProductor.getSelectedItem();
+    	campo.setIdProductor(productor.getIdProductor());
     	campo.setNombre(this.jTFNombre.getText());
     	campoDao.insertCampo(campo);
-    	this.jBAceptarMouseClicked(null);
+    	this.setVisible(false);
+    	this.setEnabled(false);
     }//GEN-LAST:event_jBAceptarMouseClicked
     
     private void jCBProductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBProductorActionPerformed
