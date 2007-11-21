@@ -2,11 +2,9 @@ package scr.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.Vector;
 
 import scr.entidades.Sector;
@@ -71,14 +69,14 @@ public class SectoresDao extends JdbcManager {
 		
 		while(rs.next()) {
 			sector = new Sector();
-			sector.setIdsector(rs.getInt(0));
-			sector.setIdTipoCultivo(rs.getInt(1));
-			sector.setIdcontrato(rs.getInt(2));
-			sector.setIdcampo(rs.getInt(3));
-			sector.setDescripcion(rs.getString(4));
-			sector.setFechahorainicio(rs.getTimestamp(5));
-			sector.setFechahorafin(rs.getTimestamp(6));
-			sector.setSrhectareas(rs.getInt(7));
+			sector.setIdsector(rs.getInt(1));
+			sector.setIdTipoCultivo(rs.getInt(2));
+			sector.setIdcontrato(rs.getInt(3));
+			sector.setIdcampo(rs.getInt(4));
+			sector.setDescripcion(rs.getString(5));
+			sector.setFechahorainicio(rs.getTimestamp(6));
+			sector.setFechahorafin(rs.getTimestamp(7));
+			sector.setSrhectareas(rs.getInt(8));
 			vec.add(sector);
 		}
 		return vec;
@@ -129,19 +127,21 @@ public class SectoresDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		String query = "INSERT INTO Sector (srIdTipoCultivo, srIdContrato, srIdCampo, " +
-				"srDescripcion, srFechaHoraInicio, srFechaHoraFin, srHectareas) " + 
-						"VALUES (?, ?, ?, ?, ?, ?)";	
+		//String query = "INSERT INTO Sector (srIdTipoCultivo, srIdContrato, srIdCampo, " +
+		//		"srDescripcion, srFechaHoraInicio, srFechaHoraFin, srHectareas) " + 
+		//				"VALUES (?, ?, ?, ?, ?, ?,?)";
+		String query = "{? = call func_alta_sector(?,?,?,?,?,?,?)}";
 		
-		PreparedStatement pStatement = conn.prepareStatement(query);
-		pStatement.setInt(0, sector.getIdTipoCultivo());
-		pStatement.setInt(1, sector.getIdcontrato());
-		pStatement.setInt(2, sector.getIdcampo());
-		pStatement.setString(3, sector.getDescripcion());
-		pStatement.setTimestamp(4, sector.getFechahorainicio());
-		pStatement.setTimestamp(5, sector.getFechahorafin());
-		pStatement.setInt(6, sector.getSrhectareas());
-		pStatement.executeUpdate();		
+		
+		CallableStatement cStatement = conn.prepareCall(query);
+		cStatement.setInt(1, sector.getIdTipoCultivo());
+		cStatement.setInt(2, sector.getIdcontrato());
+		cStatement.setInt(3, sector.getIdcampo());
+		cStatement.setString(4, sector.getDescripcion());
+		cStatement.setTimestamp(5, sector.getFechahorainicio());
+		cStatement.setTimestamp(6, sector.getFechahorafin());
+		cStatement.setInt(7, sector.getSrhectareas());
+		rs = cStatement.executeQuery();		
 		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

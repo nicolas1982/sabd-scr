@@ -1,7 +1,7 @@
 package scr.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,7 +13,6 @@ public class ProductorDao extends JdbcManager {
 	public Vector<Productor> getProductores(){
 		Connection conn = null;
 		ResultSet rs = null;
-		Vector<Productor> vec = null;
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
@@ -22,7 +21,7 @@ public class ProductorDao extends JdbcManager {
 		Statement statement = conn.createStatement();
 		rs = statement.executeQuery(query);		
 		
-		vec = this.buildProductoresFromResultSet(rs);
+		return this.buildProductoresFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -33,7 +32,7 @@ public class ProductorDao extends JdbcManager {
 		}finally {
 			this.cerrarConexion(conn,rs);
 		}
-		return vec;
+		return null;
 	}
 	private Vector<Productor> buildProductoresFromResultSet(ResultSet rs) throws SQLException{
 		Vector<Productor> vec = new Vector<Productor>();
@@ -84,14 +83,16 @@ public class ProductorDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		String query = "INSERT INTO Productor (prIdDomicilio, prNombre) " + 
-						"VALUES (?, ?)";	
+		//String query = "INSERT INTO Productor (prIdDomicilio, prNombre) " + 
+		//				"VALUES (?, ?)";	
+		// la funcion es al reves nombreproductor y despues id dom
+		String query = "{? = call fun_insertar_productor(?,?)}";
 		
-		PreparedStatement pStatement = conn.prepareStatement(query);
-		pStatement.setInt(0, productor.getIdDomicilio());
-		pStatement.setString(1, productor.getNombre());
-		
-		pStatement.executeUpdate();		
+		CallableStatement cStatement = conn.prepareCall(query);
+		cStatement.setString(1, productor.getNombre());
+		cStatement.setInt(2, productor.getIdDomicilio());
+
+		rs = cStatement.executeQuery();		
 		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -103,7 +104,5 @@ public class ProductorDao extends JdbcManager {
 			this.cerrarConexion(conn,rs);
 		}
 	}
-	
-	
 	
 }
