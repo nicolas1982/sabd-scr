@@ -11,15 +11,14 @@ import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
+import layout.utils.DateUtil;
 import scr.dao.FacturacionDao;
 import scr.dao.ProductorDao;
 import scr.entidades.CabeceraFactura;
 import scr.entidades.Productor;
 import scr.entidades.RenglonFactura;
+import scr.entidades.Rol;
 import scr.entidades.Session;
-
-import layout.entities.Rol;
-import layout.utils.DateUtil;
 
 
 /**
