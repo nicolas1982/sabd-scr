@@ -35,6 +35,5 @@ public class CabeceraFactura {
 	public void setMontototal(double montototal) {
 		this.montototal = montototal;
 	}
-
 	
 }

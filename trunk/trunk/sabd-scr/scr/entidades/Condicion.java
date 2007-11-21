@@ -45,4 +45,7 @@ public class Condicion {
 	public void setInicio(int inicio) {
 		this.inicio = inicio;
 	}
+	public String toString(){
+		return this.descripcion;
+	}
 }
