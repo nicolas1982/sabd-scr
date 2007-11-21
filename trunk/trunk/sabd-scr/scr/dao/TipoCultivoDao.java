@@ -40,9 +40,9 @@ public class TipoCultivoDao extends JdbcManager {
 		TipoCultivo tipoCultivo = null;
 		while(rs.next()){
 			tipoCultivo = new TipoCultivo();
-			tipoCultivo.setId(rs.getInt(0));
-			tipoCultivo.setDescripcion(rs.getString(1));
-			tipoCultivo.setFactorAjuste(rs.getFloat(2));
+			tipoCultivo.setId(rs.getInt(1));
+			tipoCultivo.setDescripcion(rs.getString(2));
+			tipoCultivo.setFactorAjuste(rs.getFloat(3));
 			vec.add(tipoCultivo);
 		}
 		return vec;
