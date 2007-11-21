@@ -1,13 +1,7 @@
 package layout.panels;
 
-import scr.dao.DomicilioDao;
-import scr.dao.PaisDao;
 import scr.dao.ProductorDao;
-import scr.dao.ProvinciaDao;
-import scr.entidades.Domicilio;
-import scr.entidades.Pais;
 import scr.entidades.Productor;
-import scr.entidades.Provincia;
 
 /**
  *

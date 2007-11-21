@@ -20,6 +20,7 @@ import layout.panels.JPanelAltaSector;
 import layout.panels.JPanelConsultarEstadoSector;
 import layout.panels.JPanelConsultarFactura;
 import layout.panels.JPanelGenerarFacturacion;
+import layout.panels.JPanelLogin;
 
 /**
  *
@@ -180,9 +181,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
         );
         Dimension dim = new Dimension();
-        dim.setSize(800,600);
+        dim.setSize(600,500);
         this.setPreferredSize(dim);
         pack();
+        this.setTitle("SISTEMA DE CONTROL DE RIEGO");
+        createFrame("Login Usuario", new JPanelLogin());
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemConsultarEstadoSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsultarEstadoSectorActionPerformed

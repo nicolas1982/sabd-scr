@@ -1,5 +1,9 @@
 package layout.panels;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Window;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -91,16 +95,25 @@ public class JPanelLogin extends javax.swing.JPanel {
                 .add(jBAceptar)
                 .addContainerGap(75, Short.MAX_VALUE))
         );
+        Dimension dim = new Dimension();
+        dim.setSize(500,400);
+        this.setPreferredSize(dim);
+        this.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.setAlignmentY(Component.CENTER_ALIGNMENT);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
+    	this.jBAceptar.setEnabled(false);
     	LoginDao loginDao = new LoginDao();
-    	if(loginDao.buscarPorNombreYPass(this.jTFUsr.getText(), this.jLPsswd.getText()) != null){
+    	if(loginDao.buscarPorNombreYPass(this.jTFUsr.getText(), this.jPPasswd.toString()) != null){
     		this.setVisible(false);
     	} else {
     		String message = "El usuario ingresado es incorrecto";
     	    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
     	        JOptionPane.ERROR_MESSAGE);
+    	    this.jTFUsr.setText("");
+    	    this.jPPasswd.setText("");
+    	    this.jBAceptar.setEnabled(true);
     	}
     }//GEN-LAST:event_jBAceptarKeyPressed
 
