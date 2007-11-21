@@ -57,6 +57,7 @@ public class Sector {
 		this.idTipoCultivo = idTipoCultivo;
 	}
 	public Integer getSrhectareas() {
+		if (this.srhectareas == null)return new Integer(0);
 		return srhectareas;
 	}
 	public void setSrhectareas(Integer srhectareas) {
