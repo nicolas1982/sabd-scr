@@ -9,7 +9,11 @@ package layout.panels;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import layout.utils.DateUtil;
 
 import scr.dao.SectoresDao;
 import scr.entidades.Rol;
@@ -60,6 +64,8 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
         jTable2 = new javax.swing.JTable();
         jButtonConsultar = new javax.swing.JButton();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        dateChooserCombo1.setDateFormat(DateUtil.formatDate);
+        dateChooserCombo1.setVisible(false);
         jLabelErrorSector = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -83,6 +89,7 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
         //jComboBoxSector.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Fecha");
+        jLabel3.setVisible(false);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,8 +170,15 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
         boolean validateOk = validateEstadoSector();
         if(validateOk) {
         	Sector sector = (Sector) jComboBoxSector.getSelectedItem();
-        	daoSectores.getEstadoRiego(sector.getIdsector());
-            
+        	Short corto = daoSectores.getEstadoRiego(sector.getIdsector());
+        	if (corto.shortValue() == 0){
+        		JOptionPane.showMessageDialog(new JFrame(), "ESTA REGANDO PROFESORA!!!", "Dialog",
+    	    	        JOptionPane.INFORMATION_MESSAGE);
+        	}else
+        	{
+        		JOptionPane.showMessageDialog(new JFrame(), "NO ESTA REGANDO LAMENTO DECIRLE PROFESORA!!!", "Dialog",
+    	    	        JOptionPane.INFORMATION_MESSAGE);
+        	}
         } 
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
@@ -193,7 +207,6 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
         	sectores = daoSectores.getSectores();
         }
         
-        jComboBoxSector.addItem(new Sector());//ver!!!
         loadCombo(sectores);
         
     }
@@ -221,7 +234,7 @@ public class JPanelConsultarEstadoSector extends javax.swing.JPanel {
 
     private boolean validateCombo(JComboBox jComboBox) {
         int indexSelected = jComboBox.getSelectedIndex();
-        return indexSelected != 0;
+        return indexSelected >= 0;
     }
 
      
