@@ -6,18 +6,35 @@
 
 package layout.panels;
 
+import java.util.Vector;
+
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import scr.dao.ProductorDao;
+import scr.dao.RegistroMedicionDao;
+import scr.dao.SectoresDao;
+import scr.dao.SensoresDao;
+import scr.entidades.Productor;
+import scr.entidades.Sector;
+import scr.entidades.Sensor;
+
+
+import layout.utils.DateUtil;
 
 /**
  *
  * @author  Administrador
  */
 public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
-    
-    private Integer idSector;
-    
-    /** Creates new form JPanelRegistroMedicion */
+        
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/** Creates new form JPanelRegistroMedicion */
     public JPanelAltaRegistroMedicion() {
         initComponents();
         extraInitComponents();
@@ -42,6 +59,8 @@ public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jButtonRegistrarMedicion = new javax.swing.JButton();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        dateChooserCombo1.setDateFormat(DateUtil.formatDate);
+        dateChooserCombo1.setVisible(false);
         jLabelErrorProductor = new javax.swing.JLabel();
         jLabelErrorSector = new javax.swing.JLabel();
         jLabelErrorSensor = new javax.swing.JLabel();
@@ -51,11 +70,16 @@ public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
 
         jLabel2.setText("Productor");
 
-        jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
+        jComboBoxProductor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<     >"}));
+        jComboBoxProductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxProductorActionPerformed(evt);
+            }
+        });
         jLabel3.setText("Sector");
 
-        jComboBoxSector.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSector.setModel(new javax.swing.DefaultComboBoxModel(new String[] {  "<     >" }));
+        jComboBoxSector.setEnabled(false);
         jComboBoxSector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSectorActionPerformed(evt);
@@ -64,11 +88,13 @@ public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
 
         jLabel4.setText("Sensor");
 
-        jComboBoxSensor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSensor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<   >"}));
+        jComboBoxSensor.setEnabled(false);
 
         jLabel5.setText("Valor Medici\u00f3n");
 
         jLabel6.setText("Fecha Registraci\u00f3n");
+        jLabel6.setVisible(false);
 
         jButtonRegistrarMedicion.setText("Registrar");
         jButtonRegistrarMedicion.addActionListener(new java.awt.event.ActionListener() {
@@ -160,16 +186,38 @@ public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBoxProductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSectorActionPerformed
+    	
+        loadComboSector();
+    }//GEN-LAST:event_jComboBoxSectorActionPerformed
+
     private void jComboBoxSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSectorActionPerformed
-        //cuando cambio el combo de sector refresco el combo de sensor
-        loadComboSensor(idSector);
+        loadComboSensor();
     }//GEN-LAST:event_jComboBoxSectorActionPerformed
 
     private void jButtonRegistrarMedicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarMedicionActionPerformed
         
         boolean validateOk = validarAltaMedicion();
         if(validateOk) {
-            // FIXME llamar al SP SP_INSERT_REGISTRO_ MEDICION()
+          RegistroMedicionDao dao = new RegistroMedicionDao(); 
+          int idSensor = ((Sensor)jComboBoxSensor.getSelectedItem()).getIdSensor();
+          Float valor = new Float(Float.parseFloat(jTextField1.getText()));
+          try {
+        	  Integer devolucion = dao.insertRegistroMedicion(idSensor,valor);
+        	  jComboBoxProductor.setEnabled(false);
+        	  jComboBoxSector.setEnabled(false);
+        	  jComboBoxSensor.setEnabled(false);
+        	  jTextField1.setEnabled(false);
+        	  if (devolucion.intValue() != 0)       	  
+        		  JOptionPane.showMessageDialog(new JFrame(), "Registro Medicion cargado correctamente", "Dialog",
+        				  JOptionPane.INFORMATION_MESSAGE);
+        	  else
+        		  JOptionPane.showMessageDialog(new JFrame(), "Error. ", "Dialog",
+      	    	        JOptionPane.ERROR_MESSAGE);
+          }catch(Exception e) {
+        	  JOptionPane.showMessageDialog(new JFrame(), "Error. " + e  , "Dialog",
+    	    	        JOptionPane.ERROR_MESSAGE);
+          }
         } 
     }//GEN-LAST:event_jButtonRegistrarMedicionActionPerformed
 
@@ -187,22 +235,42 @@ public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
     
     private void loadCombos() {
         loadComboProductor();
-        loadComboSector();
-        loadComboSensor(idSector);
+
     }
 
-    private void loadComboSensor(Integer idSector) {
-        //TODO llamar al SP SP_GET_SENSORES(idSector) ;
+    private void loadComboSensor() {
+    	int idSector = ((Sector)jComboBoxSector.getSelectedItem()).getIdsector();
+    	SensoresDao dao = new SensoresDao();
+    	this.loadComboSen(dao.getSensores(idSector));
+    	jComboBoxSensor.setEnabled(true);
     }
-
+    private void loadComboSen(Vector<Sensor> sensores) {
+		 for (Sensor s : sensores) {
+			 jComboBoxSensor.addItem(s);
+     }
+	}
     private void loadComboSector() {
-        //TODO llamar al SP SP_GET_SECTORES();
+    	int idProductor = ((Productor)jComboBoxProductor.getSelectedItem()).getIdProductor();
+    	SectoresDao dao = new SectoresDao();
+    	this.loadComboSec(dao.getSectoresByProductor(idProductor));
+    	jComboBoxSector.setEnabled(true);
     }
+    private void loadComboSec(Vector<Sector> sectores) {
+		 for (Sector s : sectores) {
+			 jComboBoxSector.addItem(s);
+      }
+	}
 
     private void loadComboProductor() {
-        //TODO llamar al SP_GET_PRODUCTORES();
+    	ProductorDao dao = new ProductorDao();
+    	this.loadComboProd(dao.getProductores());
     }
-
+    private void loadComboProd(Vector<Productor> productores) {
+		 for (Productor p : productores) {
+			 jComboBoxProductor.addItem(p);
+       }
+	}
+    
     private boolean validarAltaMedicion() {
         boolean validate = validateProductor() && validateSector() && 
                             validateSensor() && validarMedicion();
@@ -220,8 +288,15 @@ public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
     }
 
     private boolean validarMedicion() {
-        //TODO implement!!!
-        return true;
+    	try {
+    	Float valor = new Float(Float.parseFloat(jTextField1.getText()));
+    	if (valor.floatValue() > -20 && valor.floatValue() < 70)
+    		return true;
+    	else
+    		return false;
+    	}catch(Exception e){
+    		return false;
+    	}
     }
 
     private boolean validateProductor() {
@@ -251,7 +326,7 @@ public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
 
     private boolean validateCombo(JComboBox jComboBox) {
         int indexSelected = jComboBox.getSelectedIndex();
-        return indexSelected != 0;
+        return indexSelected > 0;
     }
     
     
