@@ -14,39 +14,25 @@ public class ProductorDao extends JdbcManager {
 		Connection conn = null;
 		ResultSet rs = null;
 		Vector<Productor> vec = null;
-//		try {
-//		conn = this.getDB2ConnectionFromProperties();
-//		
-//		String query = "SELECT pridproductor, priddomicilio, prnombre FROM productor";
-//        
-//		Statement statement = conn.createStatement();
-//		rs = statement.executeQuery(query);		
-//		
-//		vec = this.buildProductoresFromResultSet(rs);
-//		
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}finally {
-//			this.cerrarConexion(conn,rs);
-//		}
-		/**
-		 * TODO: descomentar
-		 */
-		vec = new Vector<Productor>();
-        Productor prod = new Productor();
-        prod.setIdProductor(1);
-        prod.setIdDomicilio(1);
-        prod.setNombre("movia");
-        vec.add(prod);
-        prod = new Productor();
-        prod.setIdProductor(2);
-        prod.setIdDomicilio(2);
-        prod.setNombre("torobia");
-        vec.add(prod);
+		try {
+		conn = this.getDB2ConnectionFromProperties();
+		
+		String query = "SELECT pridproductor, priddomicilio, prnombre FROM productor";
+        
+		Statement statement = conn.createStatement();
+		rs = statement.executeQuery(query);		
+		
+		vec = this.buildProductoresFromResultSet(rs);
+		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.cerrarConexion(conn,rs);
+		}
 		return vec;
 	}
 	private Vector<Productor> buildProductoresFromResultSet(ResultSet rs) throws SQLException{

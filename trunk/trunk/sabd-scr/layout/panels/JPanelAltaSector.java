@@ -5,10 +5,14 @@ import java.awt.Dimension;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import scr.dao.CampoDao;
+import scr.dao.ContratoDao;
 import scr.dao.SectoresDao;
+import scr.dao.TipoCultivoDao;
 import scr.entidades.Campo;
 import scr.entidades.Contrato;
 import scr.entidades.Sector;
+import scr.entidades.TipoCultivo;
 import scr.entidades.TipoSensor;
 
 /**
@@ -19,7 +23,10 @@ public class JPanelAltaSector extends javax.swing.JPanel {
     
 	private static final long serialVersionUID = 6119223212634441001L;
 
-	SectoresDao sectorDao = new SectoresDao();
+	private SectoresDao sectorDao = new SectoresDao();
+	private CampoDao campoDao = new CampoDao();
+	private TipoCultivoDao tipoCultivoDao = new TipoCultivoDao();
+	private ContratoDao contratoDao = new ContratoDao();
 	
 	/** Creates new form JPanelAltaSector */
     public JPanelAltaSector() {
@@ -64,11 +71,11 @@ public class JPanelAltaSector extends javax.swing.JPanel {
 
         jLFechaFin.setText("Fecha fin");
 
-        jCBCampo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
+        jCBCampo.setModel(new javax.swing.DefaultComboBoxModel(campoDao.getCampos().toArray()));
 
-        jCBCultivo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
+        jCBCultivo.setModel(new javax.swing.DefaultComboBoxModel(tipoCultivoDao.getTiposCultivo().toArray()));
 
-        jCBContrato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Art\u00edculo 1", "Art\u00edculo 2", "Art\u00edculo 3", "Art\u00edculo 4" }));
+        jCBContrato.setModel(new javax.swing.DefaultComboBoxModel(contratoDao.getContratos().toArray()));
 
         jButton1.setText("Aceptar");
         jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -197,15 +204,13 @@ public class JPanelAltaSector extends javax.swing.JPanel {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
     	Sector sector = new Sector();
     	sector.setDescripcion(this.jTFDescripcion.getText());
-    	/**
-    	 * VER COMO OBTENER DE LOS COMBOS
-    	 */
+    	
     	Campo campo = (Campo) this.jCBCampo.getSelectedItem();
     	sector.setIdcampo(campo.getId());
     	Contrato contrato = (Contrato) this.jCBContrato.getSelectedItem();
     	sector.setIdcontrato(contrato.getId());
-    	
-    	sector.setIdTipoCultivo(1);
+    	TipoCultivo tipoCultivo = (TipoCultivo)this.jCBCultivo.getSelectedItem();
+    	sector.setIdTipoCultivo(tipoCultivo.getId());
     	Calendar cal = this.dCCFechaIni.getSelectedDate();
     	sector.setFechahorainicio(new Timestamp(cal.getTimeInMillis()));
     	cal = this.dCCFechaFin.getSelectedDate();

@@ -16,6 +16,7 @@ public class SectoresDao extends JdbcManager {
 	public Vector<Sector> getSectores(){
 		Connection conn = null;
 		ResultSet rs = null;
+		Vector<Sector> vec = null; 
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
@@ -24,7 +25,7 @@ public class SectoresDao extends JdbcManager {
 		Statement statement = conn.createStatement();
 		rs = statement.executeQuery(query);		
 		
-		return this.buildSectoresFromResultSet(rs);
+		vec = this.buildSectoresFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -35,12 +36,13 @@ public class SectoresDao extends JdbcManager {
 		}finally {
 			this.cerrarConexion(conn,rs);
 		}
-		return null;
+		return vec;
 	}
 	
 	public Vector<Sector> getSectoresByProductor(Integer idProductor){
 		Connection conn = null;
 		ResultSet rs = null;
+		Vector<Sector> vec = null; 
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
@@ -49,7 +51,7 @@ public class SectoresDao extends JdbcManager {
 		Statement statement = conn.createStatement();
 		rs = statement.executeQuery(query);		
 		
-		return this.buildSectoresFromResultSet(rs);
+		vec = this.buildSectoresFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -60,7 +62,7 @@ public class SectoresDao extends JdbcManager {
 		}finally {
 			this.cerrarConexion(conn,rs);
 		}
-		return null;
+		return vec;
 	}
 	
 	private Vector<Sector> buildSectoresFromResultSet(ResultSet rs) throws SQLException{
@@ -69,14 +71,14 @@ public class SectoresDao extends JdbcManager {
 		
 		while(rs.next()) {
 			sector = new Sector();
-			sector.setIdsector(rs.getInt(1));
-			sector.setIdTipoCultivo(rs.getInt(2));
-			sector.setIdcontrato(rs.getInt(3));
-			sector.setIdcampo(rs.getInt(4));
-			sector.setDescripcion(rs.getString(5));
-			sector.setFechahorainicio(rs.getTimestamp(6));
-			sector.setFechahorafin(rs.getTimestamp(7));
-			
+			sector.setIdsector(rs.getInt(0));
+			sector.setIdTipoCultivo(rs.getInt(1));
+			sector.setIdcontrato(rs.getInt(2));
+			sector.setIdcampo(rs.getInt(3));
+			sector.setDescripcion(rs.getString(4));
+			sector.setFechahorainicio(rs.getTimestamp(5));
+			sector.setFechahorafin(rs.getTimestamp(6));
+			sector.setSrhectareas(rs.getInt(7));
 			vec.add(sector);
 		}
 		return vec;
@@ -128,7 +130,7 @@ public class SectoresDao extends JdbcManager {
 		conn = this.getDB2ConnectionFromProperties();
 		
 		String query = "INSERT INTO Sector (srIdTipoCultivo, srIdContrato, srIdCampo, " +
-				"srDescripcion, srFechaHoraInicio, srFechaHoraFin) " + 
+				"srDescripcion, srFechaHoraInicio, srFechaHoraFin, srHectareas) " + 
 						"VALUES (?, ?, ?, ?, ?, ?)";	
 		
 		PreparedStatement pStatement = conn.prepareStatement(query);
@@ -138,6 +140,7 @@ public class SectoresDao extends JdbcManager {
 		pStatement.setString(3, sector.getDescripcion());
 		pStatement.setTimestamp(4, sector.getFechahorainicio());
 		pStatement.setTimestamp(5, sector.getFechahorafin());
+		pStatement.setInt(6, sector.getSrhectareas());
 		pStatement.executeUpdate();		
 		
 		} catch (ClassNotFoundException e) {
@@ -150,6 +153,7 @@ public class SectoresDao extends JdbcManager {
 			this.cerrarConexion(conn,rs);
 		}
 	}
+	
 	
 }
 

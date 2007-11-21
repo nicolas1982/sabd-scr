@@ -2,7 +2,6 @@ package layout.panels;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Window;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -105,9 +104,7 @@ public class JPanelLogin extends javax.swing.JPanel {
     private void jBAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBAceptarKeyPressed
     	this.jBAceptar.setEnabled(false);
     	LoginDao loginDao = new LoginDao();
-    	/**
-    	 * TODO: ver lo del pass
-    	 */
+    	
     	if(loginDao.buscarPorNombreYPass(this.jTFUsr.getText(), convertirAString(this.jPPasswd.getPassword())) != null){
     		this.setVisible(false);
     		this.setEnabled(false);

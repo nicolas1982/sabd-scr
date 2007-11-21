@@ -75,9 +75,6 @@ public class JPanelAltaCampo extends javax.swing.JPanel {
 
         jLProductor.setText("Productor");
         
-        /**
-         * TODO: corregir lo de generics
-         */
         jCBProductor.setModel(new javax.swing.DefaultComboBoxModel(productorDao.getProductores().toArray()));
         jCBProductor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +166,6 @@ public class JPanelAltaCampo extends javax.swing.JPanel {
 
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
     	Campo campo = new Campo();
-    	campo.setHectareas(10);
     	campo.setIdDomicilio(1);
     	Productor productor = (Productor) this.jCBProductor.getSelectedItem();
     	campo.setIdProductor(productor.getIdProductor());

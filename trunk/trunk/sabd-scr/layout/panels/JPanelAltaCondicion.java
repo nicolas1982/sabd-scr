@@ -51,8 +51,7 @@ public class JPanelAltaCondicion extends javax.swing.JPanel {
 
         jLTipo.setText("Tipo");
 
-        Sector[] sectores = (Sector[]) sectorDao.getSectores().toArray();
-        jCBSector.setModel(new javax.swing.DefaultComboBoxModel(sectores));
+        jCBSector.setModel(new javax.swing.DefaultComboBoxModel(sectorDao.getSectores().toArray()));
 
         jCBComparador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
 
@@ -158,10 +157,8 @@ public class JPanelAltaCondicion extends javax.swing.JPanel {
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
     	Condicion condicion = new Condicion();
     	condicion.setDescripcion(this.jTFDescripcion.getText());
-    	/**
-    	 * TODO: ver como obtengo el sector id
-    	 */
-    	condicion.setIdSector(1);
+    	Sector sector = (Sector) this.jCBSector.getSelectedItem();
+    	condicion.setIdSector(sector.getIdsector());
     	/**
     	 * TODO: ver o que devuelve este selected index
     	 */

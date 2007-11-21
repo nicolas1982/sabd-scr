@@ -6,14 +6,7 @@ public class Campo {
 	private int idProductor;
 	private int idDomicilio;
 	private String nombre;
-	private int hectareas;
 	
-	public int getHectareas() {
-		return hectareas;
-	}
-	public void setHectareas(int hectareas) {
-		this.hectareas = hectareas;
-	}
 	public int getId() {
 		return id;
 	}

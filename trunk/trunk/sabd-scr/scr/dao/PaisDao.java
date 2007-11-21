@@ -1,51 +1,51 @@
 package scr.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.sql.Statement;
+import java.util.Vector;
 
 import scr.entidades.Pais;
 
 public class PaisDao extends JdbcManager {
 
-	@SuppressWarnings("finally")
-	public Collection<Pais> buscarTodos(){
+	public Vector<Pais> buscarTodos(){
+		Connection conn = null;
 		ResultSet rs = null;
-		Connection con = null;
-		Collection<Pais> paises = new ArrayList<Pais>();
-		try{
-			con = this.getDB2ConnectionFromProperties();
+		Vector<Pais> vec = null; 
+		try {
+			conn = this.getDB2ConnectionFromProperties();
 			
-			/**
-			 * TODO: SELECT PARA BUSCAR TODOS LOS PAISES
-			 */
+			String query = "SELECT * FROM Pais ";
+	        
+			Statement statement = conn.createStatement();
+			rs = statement.executeQuery(query);		
 			
-			PreparedStatement cs = con.prepareCall("SP_GET_PAISES()");
-			rs = cs.executeQuery();
-			while(rs.next()){
-				paises.add(this.rellenarPais(rs));
-			}
-		}catch(SQLException sqlex){
-			System.out.println("Can not retrive Paises, cause: " + sqlex.getMessage());
-			return null;
+			vec = this.buildPaisesFromResultSet(rs);
+		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.cerrarConexion(conn,rs);
 		}
-		catch(Exception ex){
-			System.out.println("Error, cause: " + ex.getMessage());
-			return null;
-		}finally{
-			cerrarConexion(con,rs);
-			return paises;
-		}
+		return vec;
 	}
 	
-	private Pais rellenarPais(ResultSet rs) throws SQLException{
+	private Vector<Pais> buildPaisesFromResultSet(ResultSet rs) throws SQLException{
+		Vector<Pais>vec = new Vector<Pais>();
 		Pais pais = new Pais();
-		pais.setId(rs.getInt(0));
-		pais.setNombre(rs.getString(1));
-		return pais;
+		while(rs.next()){
+			pais = new Pais();
+			pais.setId(rs.getInt(0));
+			pais.setNombre(rs.getString(1));
+			vec.add(pais);
+		}
+		return vec;
 	}
 	
 }
