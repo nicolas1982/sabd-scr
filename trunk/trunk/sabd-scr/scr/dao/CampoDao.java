@@ -1,7 +1,7 @@
 package scr.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,15 +17,16 @@ public class CampoDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		String query = "INSERT INTO Campo (coIdProductor, coIdDomicilio, coNombre) " + 
-						"VALUES (?, ?, ?, ?)";	
+		//String query = "INSERT INTO Campo (coIdProductor, coIdDomicilio, coNombre) " + 
+		//				"VALUES (?, ?, ?, ?)";	
+		String query = "{ ? = call fun_insert_campo(?,?,?)}";
+		//fun_insert_campo(idProductor integer, idDomicilio integer, nombre varchar(30))
+		CallableStatement cStatement = conn.prepareCall(query);
+		cStatement.setInt(1, campo.getIdProductor());
+		cStatement.setInt(2, campo.getIdDomicilio());
+		cStatement.setString(3, campo.getNombre());
 		
-		PreparedStatement pStatement = conn.prepareStatement(query);
-		pStatement.setInt(0, campo.getIdProductor());
-		pStatement.setInt(1, campo.getIdDomicilio());
-		pStatement.setString(2, campo.getNombre());
-		
-		pStatement.executeUpdate();		
+		rs = cStatement.executeQuery();		
 		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -68,10 +69,10 @@ public class CampoDao extends JdbcManager {
 		Campo campo = null;
 		while(rs.next()){
 			campo = new Campo();
-			campo.setId(rs.getInt(0));
-			campo.setIdProductor(rs.getInt(1));
-			campo.setIdDomicilio(rs.getInt(2));
-			campo.setNombre(rs.getString(3));
+			campo.setId(rs.getInt(1));
+			campo.setIdProductor(rs.getInt(2));
+			campo.setIdDomicilio(rs.getInt(3));
+			campo.setNombre(rs.getString(4));
 			vec.add(campo);
 		}
 		return vec;
