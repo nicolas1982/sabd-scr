@@ -3,6 +3,7 @@ package layout.panels;
 import scr.dao.CondicionDao;
 import scr.dao.CondicionNumericaDao;
 import scr.entidades.Condicion;
+import scr.entidades.CondicionHoraria;
 import scr.entidades.CondicionNumerica;
 
 /**
@@ -128,10 +129,9 @@ public class JPanelAltaCondicionNumerica extends javax.swing.JPanel {
 
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
     	CondicionNumerica condicionNumerica = new CondicionNumerica();
+    	Condicion condicion = (Condicion) this.jCBCondicion.getSelectedItem();
+    	condicionNumerica.setId(condicion.getId());
     	condicionNumerica.setValorCondicion(new Float(this.jTFValor.getText()).floatValue());
-    	/**
-    	 * TODO: esto lo vamos a definir?
-    	 */
     	condicionNumerica.setTipoCondicionNum(1);
     	condicionNumericaDao.insertCondicionNumerica(condicionNumerica);
     	this.setVisible(false);

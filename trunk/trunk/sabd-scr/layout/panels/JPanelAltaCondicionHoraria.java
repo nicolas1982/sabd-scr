@@ -126,7 +126,9 @@ public class JPanelAltaCondicionHoraria extends javax.swing.JPanel {
 
     private void jBAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAceptarMouseClicked
     	CondicionHoraria condicionHoraria = new CondicionHoraria();
+    	Condicion condicion = (Condicion) this.jCBCondicion.getSelectedItem();
     	condicionHoraria.setValorCondicion(new Integer(this.jTFValor.getText()).intValue());
+    	condicionHoraria.setId(condicion.getId());
     	condicionHorariaDao.insertCondicionHoraria(condicionHoraria);
     	this.setVisible(false);
     }//GEN-LAST:event_jBAceptarMouseClicked

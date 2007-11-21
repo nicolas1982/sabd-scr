@@ -132,7 +132,7 @@ public class JPanelGenerarFacturacion extends javax.swing.JPanel {
         	FacturacionDao dao = new FacturacionDao();
         	boolean resultado;
         	try {
-            	// TODO llamar al SP SP_FAC_PROD( p_mesFactura date, p_idProductor int);
+            	
         		resultado = dao.generarFactura(fecha,productor);
         		if (resultado) {
         			JOptionPane.showMessageDialog(new JFrame(), "Factura cargada correctamente", "Dialog",
