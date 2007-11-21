@@ -78,8 +78,7 @@ public class JPanelAltaCampo extends javax.swing.JPanel {
         /**
          * TODO: corregir lo de generics
          */
-        Productor[] productores = (Productor[]) productorDao.getProductores().toArray();
-        jCBProductor.setModel(new javax.swing.DefaultComboBoxModel(productores));
+        jCBProductor.setModel(new javax.swing.DefaultComboBoxModel(productorDao.getProductores().toArray()));
         jCBProductor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBProductorActionPerformed(evt);

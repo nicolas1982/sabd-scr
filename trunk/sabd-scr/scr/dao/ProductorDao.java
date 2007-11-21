@@ -33,6 +33,9 @@ public class ProductorDao extends JdbcManager {
 //		}finally {
 //			this.cerrarConexion(conn,rs);
 //		}
+		/**
+		 * TODO: descomentar
+		 */
 		vec = new Vector<Productor>();
         Productor prod = new Productor();
         prod.setIdProductor(1);
