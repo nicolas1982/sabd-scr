@@ -11,8 +11,8 @@ import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import layout.entities.Rol;
 import scr.dao.SectoresDao;
+import scr.entidades.Rol;
 import scr.entidades.Sector;
 
 
