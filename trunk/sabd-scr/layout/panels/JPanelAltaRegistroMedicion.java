@@ -13,12 +13,12 @@ import javax.swing.JLabel;
  *
  * @author  Administrador
  */
-public class JPanelRegistroMedicion extends javax.swing.JPanel {
+public class JPanelAltaRegistroMedicion extends javax.swing.JPanel {
     
     private Integer idSector;
     
     /** Creates new form JPanelRegistroMedicion */
-    public JPanelRegistroMedicion() {
+    public JPanelAltaRegistroMedicion() {
         initComponents();
         extraInitComponents();
     }
