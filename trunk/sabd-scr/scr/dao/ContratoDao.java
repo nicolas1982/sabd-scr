@@ -25,10 +25,8 @@ public class ContratoDao extends JdbcManager {
 		vec = this.buildContratosFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);

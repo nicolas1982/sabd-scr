@@ -12,7 +12,7 @@ package scr.entidades;
 /**
  *
  * @author Administrador
- * TODO quitar el seleccione de aca
+ * 
  */
 public enum TipoSensor {
     SELECCIONE   (-1, "Seleccione un item..."),

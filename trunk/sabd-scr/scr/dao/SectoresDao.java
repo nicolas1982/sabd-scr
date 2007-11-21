@@ -26,10 +26,8 @@ public class SectoresDao extends JdbcManager {
 		vec = this.buildSectoresFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -52,10 +50,8 @@ public class SectoresDao extends JdbcManager {
 		vec = this.buildSectoresFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -110,10 +106,8 @@ public class SectoresDao extends JdbcManager {
 		return retValue;
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			this.cerrarConexion(conn,rs);
@@ -127,7 +121,7 @@ public class SectoresDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		//String query = "INSERT INTO Sector (srIdTipoCultivo, srIdContrato, srIdCampo, " +
+		//String query = "INS INTO Sector (srIdTipoCultivo, srIdContrato, srIdCampo, " +
 		//		"srDescripcion, srFechaHoraInicio, srFechaHoraFin, srHectareas) " + 
 		//				"VALUES (?, ?, ?, ?, ?, ?,?)";
 		String query = "{? = call func_alta_sector(?,?,?,?,?,?,?)}";
@@ -144,10 +138,8 @@ public class SectoresDao extends JdbcManager {
 		rs = cStatement.executeQuery();		
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);

@@ -1,5 +1,6 @@
 package scr.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,10 +25,8 @@ public class SensoresDao extends JdbcManager{
 		return this.buildSensoresFromResultSet(rs);
 		
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this.cerrarConexion(conn,rs);
@@ -47,5 +46,27 @@ public class SensoresDao extends JdbcManager{
 			vec.add(sensor);
 		}
 		return vec;
+	}
+
+	public void insertSensor(int tipoSensor, int idSector) {
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getDB2ConnectionFromProperties();
+			
+			String query = "{? = call func_insert_sensor(?,?)}";
+			
+			CallableStatement cStatement = conn.prepareCall(query);
+			cStatement.setInt(1, idSector);
+			cStatement.setInt(2, tipoSensor);
+			rs = cStatement.executeQuery();		
+		
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			this.cerrarConexion(conn,rs);
+		}
 	}
 }
