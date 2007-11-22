@@ -20,7 +20,7 @@ public class RegistroMedicionDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		CallableStatement callableStatement = conn.prepareCall("{? = call fun_insert_registro_medicion(?, ?)}");
+		CallableStatement callableStatement = conn.prepareCall("{? = call fun_ins_reg_med(?, ?)}");
 		
 	    // Register the type of the return value
 		//callableStatement.registerOutParameter(1, Types.INTEGER);
@@ -65,7 +65,7 @@ public class RegistroMedicionDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		CallableStatement callableStatement = conn.prepareCall("{? = call fun_on_insert_medicion(?)}");
+		CallableStatement callableStatement = conn.prepareCall("{? = call fun_on_ins_med(?)}");
 		
 	    // Register the type of the return value
 		callableStatement.registerOutParameter(1, Types.SMALLINT);

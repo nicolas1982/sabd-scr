@@ -2,12 +2,14 @@ package scr.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
+import java.text.ParseException;
 import java.util.Vector;
 
+import layout.utils.DateUtil;
 import scr.entidades.CabeceraFactura;
 import scr.entidades.Productor;
 import scr.entidades.RenglonFactura;
@@ -16,9 +18,11 @@ public class FacturacionDao extends JdbcManager {
 	public boolean generarFactura(String fecha, Productor productor) {
 		Connection conn = null;
 		try {
-			conn = this.getDB2ConnectionFromProperties();
-			String query = this.props.getProperty("func_fac_prod");
+			java.util.Date d2 = DateUtil.formatDate.parse(fecha);
+			conn = this.getIDSConnectionFromProperties();
+			String query = "{? = call fun_fac_prod(?,?)}";
 			CallableStatement cs = conn.prepareCall(query);
+			
 			cs.setString(1,fecha);
 			cs.setInt(2,productor.getIdProductor());
 			boolean resultado = cs.execute();
@@ -27,6 +31,8 @@ public class FacturacionDao extends JdbcManager {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
 				e.printStackTrace();
 			}finally {
 				this.cerrarConexion(conn);

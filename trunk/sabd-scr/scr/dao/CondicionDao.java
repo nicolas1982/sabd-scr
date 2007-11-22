@@ -24,7 +24,7 @@ public class CondicionDao extends JdbcManager {
 //				" cnDiscriminador, cnInicio) " + 
 //						"VALUES (?, ?, ?, ?, ?)";	
 		
-		String query = "{ ? = call fun_insert_condicion(?,?,?,?,?)}";
+		String query = "{ ? = call fun_ins_con(?,?,?,?,?)}";
 		
 		CallableStatement cStatement = conn.prepareCall(query);
 		cStatement.setInt(1, condicion.getIdSector());

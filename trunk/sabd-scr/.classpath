@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path=""/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/DateChooser.jar"/>
-	<classpathentry kind="lib" path="lib/ifxjdbc.jar"/>
-	<classpathentry kind="lib" path="lib/swing-layout-1.0.jar"/>
-	<classpathentry kind="output" path=""/>
+	<classpathentry path="" kind="src"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER" kind="con"/>
+	<classpathentry path="lib/DateChooser.jar" kind="lib"/>
+	<classpathentry path="lib/ifxjdbc.jar" kind="lib"/>
+	<classpathentry path="lib/swing-layout-1.0.jar" kind="lib"/>
+	<classpathentry path="lib/db2jcc_license_c.jar" kind="lib"/>
+	<classpathentry path="lib/db2jcc_license_cu.jar" kind="lib"/>
+	<classpathentry path="lib/db2jcc.jar" kind="lib"/>
+	<classpathentry path="" kind="output"/>
 </classpath>

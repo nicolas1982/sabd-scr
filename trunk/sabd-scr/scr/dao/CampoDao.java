@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.Vector;
 
 import scr.entidades.Campo;
@@ -15,11 +16,12 @@ public class CampoDao extends JdbcManager {
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
-		conn = this.getDB2ConnectionFromProperties();
+		conn = this.getIDSConnectionFromProperties();
 		
 		String query = "{ ? = call fun_insert_campo(?,?,?)}";
 		//fun_ins_campo(idProductor integer, idDomicilio integer, nombre varchar(30))
 		CallableStatement cStatement = conn.prepareCall(query);
+		
 		cStatement.setInt(1, campo.getIdProductor());
 		cStatement.setInt(2, campo.getIdDomicilio());
 		cStatement.setString(3, campo.getNombre());

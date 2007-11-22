@@ -70,8 +70,8 @@ public class SectoresDao extends JdbcManager {
 			sector.setIdcontrato(rs.getInt(3));
 			sector.setIdcampo(rs.getInt(4));
 			sector.setDescripcion(rs.getString(5));
-			sector.setFechahorainicio(rs.getTimestamp(6));
-			sector.setFechahorafin(rs.getTimestamp(7));
+			sector.setFechahorainicio(rs.getDate(6));
+			sector.setFechahorafin(rs.getDate(7));
 			sector.setSrhectareas(rs.getInt(8));
 			vec.add(sector);
 		}
@@ -91,7 +91,7 @@ public class SectoresDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		CallableStatement callableStatement = conn.prepareCall("{call fun_get_estado_riego(?)}");
+		CallableStatement callableStatement = conn.prepareCall("{call fun_get_est_rie(?)}");
 		
 	    // Set the value for the IN parameter
 		callableStatement.setInt(1, idSector);
@@ -119,12 +119,12 @@ public class SectoresDao extends JdbcManager {
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
-		conn = this.getDB2ConnectionFromProperties();
+		conn = this.getIDSConnectionFromProperties();
 		
 		//String query = "INS INTO Sector (srIdTipoCultivo, srIdContrato, srIdCampo, " +
 		//		"srDescripcion, srFechaHoraInicio, srFechaHoraFin, srHectareas) " + 
 		//				"VALUES (?, ?, ?, ?, ?, ?,?)";
-		String query = "{? = call func_alta_sector(?,?,?,?,?,?,?)}";
+		String query = "{? = call fun_alta_sector(?,?,?,?,?,?,?)}";
 		
 		
 		CallableStatement cStatement = conn.prepareCall(query);
@@ -132,8 +132,8 @@ public class SectoresDao extends JdbcManager {
 		cStatement.setInt(2, sector.getIdcontrato());
 		cStatement.setInt(3, sector.getIdcampo());
 		cStatement.setString(4, sector.getDescripcion());
-		cStatement.setTimestamp(5, sector.getFechahorainicio());
-		cStatement.setTimestamp(6, sector.getFechahorafin());
+		cStatement.setString(5, sector.getFechahorainicio().toString());
+		cStatement.setString(6, sector.getFechahorafin().toString());
 		cStatement.setInt(7, sector.getSrhectareas());
 		rs = cStatement.executeQuery();		
 		

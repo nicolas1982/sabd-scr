@@ -20,7 +20,7 @@ public class CondicionNumericaDao extends JdbcManager {
 		 */
 		//String query = "INS INTO CondicionNumerica (cnaValorCondicion, cnaIdTipoCondNum) " + 
 		//				"VALUES (?, ?)";	
-		String query = "{ ? = call fun_insert_condicionNumerica(?,?,?)}";
+		String query = "{ ? = call fun_ins_conN(?,?,?)}";
 		
 		CallableStatement pStatement = conn.prepareCall(query);
 		pStatement.setInt(1, condicionNumerica.getId());
