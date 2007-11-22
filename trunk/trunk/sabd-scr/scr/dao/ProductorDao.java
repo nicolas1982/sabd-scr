@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.Vector;
 
 import scr.entidades.Productor;
@@ -77,7 +78,7 @@ public class ProductorDao extends JdbcManager {
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
-		conn = this.getDB2ConnectionFromProperties();
+		conn = this.getIDSConnectionFromProperties();
 		
 		//String query = "INS INTO Productor (prIdDomicilio, prNombre) " + 
 		//				"VALUES (?, ?)";	

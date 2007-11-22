@@ -3,7 +3,11 @@ package layout.panels;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Calendar;
+
+import layout.utils.DateUtil;
+import layout.utils.StringToDate;
 
 import scr.dao.CampoDao;
 import scr.dao.ContratoDao;
@@ -53,8 +57,9 @@ public class JPanelAltaSector extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         dCCFechaIni = new datechooser.beans.DateChooserCombo();
+        dCCFechaIni.setDateFormat(DateUtil.formatDate);
         dCCFechaFin = new datechooser.beans.DateChooserCombo();
-
+        dCCFechaIni.setDateFormat(DateUtil.formatDate);
         jLTitulo.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLTitulo.setText("ALTA SECTOR");
 
@@ -210,10 +215,15 @@ public class JPanelAltaSector extends javax.swing.JPanel {
     	sector.setIdcontrato(contrato.getId());
     	TipoCultivo tipoCultivo = (TipoCultivo)this.jCBCultivo.getSelectedItem();
     	sector.setIdTipoCultivo(tipoCultivo.getId());
-    	Calendar cal = this.dCCFechaIni.getSelectedDate();
-    	sector.setFechahorainicio(new Timestamp(cal.getTimeInMillis()));
-    	cal = this.dCCFechaFin.getSelectedDate();
-    	sector.setFechahorafin(new Timestamp(cal.getTimeInMillis()));
+    	try {
+			sector.setFechahorainicio(StringToDate.stringToDate( this.dCCFechaIni.getText()));
+			sector.setFechahorafin(StringToDate.stringToDate(this.dCCFechaFin.getText()));
+    	} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
     	sectorDao.insertSector(sector);
     	this.setVisible(false);
     	this.setEnabled(false);

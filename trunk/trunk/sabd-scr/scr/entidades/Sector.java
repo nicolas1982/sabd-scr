@@ -1,6 +1,6 @@
 package scr.entidades;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Sector {
 	private Integer idsector;
@@ -11,8 +11,8 @@ public class Sector {
 	
 	//ver tipos datos
 	private Integer srhectareas;
-	private Timestamp fechahorainicio;
-	private Timestamp fechahorafin;
+	private String fechahorainicio;
+	private String fechahorafin;
 	
 	public String getDescripcion() {
 		return descripcion;
@@ -20,17 +20,25 @@ public class Sector {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public Timestamp getFechahorafin() {
+	public String getFechahorafin() {
 		return fechahorafin;
 	}
-	public void setFechahorafin(Timestamp fechahorafin) {
-		this.fechahorafin = fechahorafin;
+	public void setFechahorafin(java.util.Date fecha) {
+		String dameputafecha = fecha.toString();
+		String anio = dameputafecha.substring(0,4);
+		String dia = dameputafecha.substring(5,7);
+		String mes = dameputafecha.substring(8,10);
+		this.fechahorafin  = dia + "/" + mes + "/" + anio;
 	}
-	public Timestamp getFechahorainicio() {
+	public String getFechahorainicio() {
 		return fechahorainicio;
 	}
-	public void setFechahorainicio(Timestamp fechahorainicio) {
-		this.fechahorainicio = fechahorainicio;
+	public void setFechahorainicio(java.util.Date fecha) {
+		String dameputafecha = fecha.toString();
+		String anio = dameputafecha.substring(0,4);
+		String dia = dameputafecha.substring(5,7);
+		String mes = dameputafecha.substring(8,10);
+		this.fechahorainicio  = dia + "/" + mes + "/" + anio;
 	}
 	public Integer getIdcampo() {
 		return idcampo;

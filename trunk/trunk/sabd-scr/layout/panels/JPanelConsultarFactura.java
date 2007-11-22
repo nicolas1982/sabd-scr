@@ -204,7 +204,8 @@ public class JPanelConsultarFactura extends javax.swing.JPanel {
     }
     
     private void loadComboProductor() {
-    	int idRol = Session.getInstance().getUsuario().getIdRol();
+    	//int idRol = Session.getInstance().getUsuario().getIdRol();
+    	int idRol=1;
         ProductorDao dao = new ProductorDao();
         if(Rol.PRODUCTOR.getIdRol() == idRol) {
         	Productor prod = dao.getProductorDeUnUsuario(Session.getInstance().getUsuario().getId());

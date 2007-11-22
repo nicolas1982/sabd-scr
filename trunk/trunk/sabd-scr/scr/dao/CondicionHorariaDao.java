@@ -21,7 +21,7 @@ public class CondicionHorariaDao extends JdbcManager {
 		//String query = "INS INTO CondicionHoraria (cnValorCondicion) " + 
 		//				"VALUES (?)";
 		
-		String query = "{ ? = call fun_insert_condicionHoraria(?,?)}";
+		String query = "{ ? = call fun_ins_conH(?,?)}";
 		
 		CallableStatement cStatement = conn.prepareCall(query);
 		cStatement.setInt(1, condicionHoraria.getId());
