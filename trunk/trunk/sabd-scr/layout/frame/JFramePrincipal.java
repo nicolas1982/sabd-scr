@@ -97,14 +97,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuABMs.add(jMenuItemAltaSector);
 
         jMenuCondicion.setText("ABM Condiciones");
-        jMenuItemAltaCondicion.setText("Alta Condicion");
-        jMenuItemAltaCondicion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemAltaCondicionActionPerformed(evt);
-            }
-        });
-
-        jMenuCondicion.add(jMenuItemAltaCondicion);
+//        jMenuItemAltaCondicion.setText("Alta Condicion");
+//        jMenuItemAltaCondicion.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jMenuItemAltaCondicionActionPerformed(evt);
+//            }
+//        });
+//        jMenuCondicion.add(jMenuItemAltaCondicion);
 
         jMenuItemAltaCondicionNumerica.setText("Alta Condicion Numerica");
         jMenuItemAltaCondicionNumerica.addActionListener(new java.awt.event.ActionListener() {
