@@ -2,7 +2,6 @@ package scr.entidades;
 
 public class CondicionHoraria extends Condicion {
 	
-	//private int id;
 	private int valorCondicion;
 	
 
