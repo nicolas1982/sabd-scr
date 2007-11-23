@@ -3,10 +3,12 @@ package scr.dao;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Properties;
 
 public abstract class JdbcManager {
@@ -114,5 +116,27 @@ public abstract class JdbcManager {
 		}
 		catch ( SQLException e )
 		{System.out.println("Problemas al cerrar conexion: " + e.getMessage());}			
+	}
+	
+	protected int nextVal(Connection conn, String nombreSequence){
+		Integer idNextVal = null;
+		try {
+			CallableStatement callableStatement = conn.prepareCall("{? = call ojb_nextval_proc(?)}");
+			//callableStatement.registerOutParameter(1, Types.INTEGER);
+			callableStatement.setString(1, nombreSequence);
+			
+			ResultSet rs = callableStatement.executeQuery();
+			if(rs.next()){
+				idNextVal = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return idNextVal.intValue();
+		
+		
 	}
 }

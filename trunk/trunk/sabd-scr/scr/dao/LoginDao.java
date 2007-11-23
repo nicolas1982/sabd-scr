@@ -16,7 +16,7 @@ public class LoginDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		String query = "SELECT * FROM usuario u" +
+		String query = "SELECT * FROM usuario u " +
 				"WHERE u.uoNombre = ? and u.uoPassword = ? ";
 		
 		PreparedStatement pStatement = conn.prepareStatement(query);

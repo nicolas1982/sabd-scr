@@ -1,6 +1,5 @@
 package scr.dao;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,28 +11,39 @@ import scr.entidades.Condicion;
 
 public class CondicionDao extends JdbcManager {
 
+	@Deprecated
 	public void insertCondicion(Condicion condicion) {
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
 		conn = this.getDB2ConnectionFromProperties();
-		/*
-		 * TODO: crear fncion inse
-		 */
-//		@todo String query = "INS INTO Condicion (cnIdSector, cnDescripcion, cnComparador," +
-//				" cnDiscriminador, cnInicio) " + 
-//						"VALUES (?, ?, ?, ?, ?)";	
 		
-		String query = "{ ? = call fun_ins_con(?,?,?,?,?)}";
+		int nextVal = this.nextVal(conn, "mySequence");
 		
-		CallableStatement cStatement = conn.prepareCall(query);
-		cStatement.setInt(1, condicion.getIdSector());
-		cStatement.setString(2, condicion.getDescripcion());
-		cStatement.setInt(3, condicion.getComparador());
-		cStatement.setInt(4, condicion.getDiscriminador());
-		cStatement.setInt(5, condicion.getInicio());
+		String query = "INSERT INTO Condicion(cnIdCondicion, cnIdSector, cnDescripcion, cnComparador, " +
+				" cnDiscriminador, cnInicio) VALUES (?, ?, ?, ?, ?, ?)";
+				
+		PreparedStatement pStatement = conn.prepareStatement(query);
+		pStatement.setInt(1, nextVal);
+		pStatement.setInt(2, condicion.getIdSector());
+		pStatement.setString(3, condicion.getDescripcion());
+		pStatement.setInt(4, condicion.getComparador());
+		pStatement.setInt(5, condicion.getDiscriminador());
+		pStatement.setInt(6, condicion.getInicio());
+		pStatement.executeUpdate();
 		
-		rs = cStatement.executeQuery();		
+		//String query = "{ ? = call fun_insert_condicion(?,?,?,?,?)}";
+//		
+//		CallableStatement cStatement = conn.prepareCall(query);
+//		cStatement.setInt(1, condicion.getIdSector());
+//		cStatement.setString(2, condicion.getDescripcion());
+//		cStatement.setInt(3, condicion.getComparador());
+//		cStatement.setInt(4, condicion.getDiscriminador());
+//		cStatement.setInt(5, condicion.getInicio());
+				
+		//rs = cStatement.executeQuery();
+		
+		
 		
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -54,9 +64,9 @@ public class CondicionDao extends JdbcManager {
 			String query = "SELECT * FROM Condicion c ";
 			
 			if(discriminador == 0){
-				query += " WHERE c.cnDiscriminador == 0 ";
+				query += " WHERE c.cnDiscriminador = 0 ";
 			} else if(discriminador == 1){
-				query += " WHERE c.cnDiscriminador == 1 ";
+				query += " WHERE c.cnDiscriminador = 1 ";
 			}
 	        
 			Statement statement = conn.createStatement();

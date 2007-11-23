@@ -8,7 +8,7 @@ public class Condicion {
 	private int comparador;
 	private int discriminador;
 	private int inicio;
-	
+		
 	public int getComparador() {
 		return comparador;
 	}
