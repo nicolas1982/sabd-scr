@@ -91,7 +91,7 @@ public class SectoresDao extends JdbcManager {
 		try {
 		conn = this.getDB2ConnectionFromProperties();
 		
-		CallableStatement callableStatement = conn.prepareCall("{call fun_get_est_rie(?)}");
+		CallableStatement callableStatement = conn.prepareCall("{call fun_get_estado_riego(?)}");
 		
 	    // Set the value for the IN parameter
 		callableStatement.setInt(1, idSector);
@@ -127,13 +127,16 @@ public class SectoresDao extends JdbcManager {
 		String query = "{? = call fun_alta_sector(?,?,?,?,?,?,?)}";
 		
 		
+		
 		CallableStatement cStatement = conn.prepareCall(query);
 		cStatement.setInt(1, sector.getIdTipoCultivo());
 		cStatement.setInt(2, sector.getIdcontrato());
 		cStatement.setInt(3, sector.getIdcampo());
 		cStatement.setString(4, sector.getDescripcion());
-		cStatement.setString(5, sector.getFechahorainicio().toString());
-		cStatement.setString(6, sector.getFechahorafin().toString());
+		//cStatement.setString(5, sector.getFechahorainicio().toString());
+		cStatement.setString(5, "2001-01-01");
+		//cStatement.setString(6, sector.getFechahorafin().toString());
+		cStatement.setString(6, "2010-01-01");
 		cStatement.setInt(7, sector.getSrhectareas());
 		rs = cStatement.executeQuery();		
 		

@@ -2,7 +2,6 @@ package scr.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -10,24 +9,32 @@ import scr.entidades.CondicionHoraria;
 
 public class CondicionHorariaDao extends JdbcManager {
 
+	/**
+	 * TODO Ver si debe devolver el id de condicion horaria
+	 * @param condicionHoraria
+	 */
 	public void insertCondicionHoraria(CondicionHoraria condicionHoraria) {
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
 		conn = this.getDB2ConnectionFromProperties();
-		/*
-		 * TODO: Agregar esta funcion a la base
-		 */
-		//String query = "INS INTO CondicionHoraria (cnValorCondicion) " + 
-		//				"VALUES (?)";
+
+		String query = "{ ? = call fun_ins_condHoraria(?,?,?,?,?,?,?)}";
 		
-		String query = "{ ? = call fun_ins_conH(?,?)}";
-		
-		CallableStatement cStatement = conn.prepareCall(query);
-		cStatement.setInt(1, condicionHoraria.getId());
-		cStatement.setInt(2, condicionHoraria.getValorCondicion());
-		
-		rs = cStatement.executeQuery();		
+		CallableStatement cs = conn.prepareCall(query);
+		cs.setInt(1, condicionHoraria.getIdSector());
+		cs.setString(2, condicionHoraria.getDescripcion());
+		cs.setInt(3, condicionHoraria.getComparador());
+		cs.setInt(4, condicionHoraria.getInicio());
+		cs.setInt(5, new Integer(1));//no se usa
+		cs.setInt(6, condicionHoraria.getValorCondicion());
+		cs.setInt(7, new Integer(0));//0
+	
+		rs = cs.executeQuery();
+		Integer idCondicionHoraria;
+		if(rs.next()) {
+			idCondicionHoraria = rs.getInt(1);
+		}
 		
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

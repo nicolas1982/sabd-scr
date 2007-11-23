@@ -54,7 +54,7 @@ public class SensoresDao extends JdbcManager{
 		try {
 			conn = this.getDB2ConnectionFromProperties();
 			
-			String query = "{? = call fun_ins_sen(?,?)}";
+			String query = "{? = call fun_insert_sensor(?,?)}";
 			
 			CallableStatement cStatement = conn.prepareCall(query);
 			cStatement.setInt(1, idSector);

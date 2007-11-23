@@ -1,17 +1,9 @@
 package scr.entidades;
 
-public class CondicionNumerica {
-	
-	private int id;
+public class CondicionNumerica extends Condicion {
 	private float valorCondicion;
 	private int tipoCondicionNum;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public int getTipoCondicionNum() {
 		return tipoCondicionNum;
 	}

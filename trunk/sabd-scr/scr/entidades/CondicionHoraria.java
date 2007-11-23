@@ -1,17 +1,11 @@
 package scr.entidades;
 
-public class CondicionHoraria {
+public class CondicionHoraria extends Condicion {
 	
-	private int id;
+	//private int id;
 	private int valorCondicion;
 	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public int getValorCondicion() {
 		return valorCondicion;
 	}
