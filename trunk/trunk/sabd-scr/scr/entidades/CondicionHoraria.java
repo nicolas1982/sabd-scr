@@ -1,15 +1,24 @@
 package scr.entidades;
 
+import java.sql.Time;
+
+/**
+ * @author db2admin
+ *
+ */
 public class CondicionHoraria extends Condicion {
 	
-	private int valorCondicion;
-	
+	private Time valorCondicion;
 
-	public int getValorCondicion() {
+	public Time getValorCondicion() {
 		return valorCondicion;
 	}
-	public void setValorCondicion(int valorCondicion) {
+
+	public void setValorCondicion(Time valorCondicion) {
 		this.valorCondicion = valorCondicion;
 	}
+	
+
+	
 	
 }

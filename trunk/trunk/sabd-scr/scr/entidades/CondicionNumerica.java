@@ -1,7 +1,9 @@
 package scr.entidades;
 
+import java.math.BigDecimal;
+
 public class CondicionNumerica extends Condicion {
-	private float valorCondicion;
+	private BigDecimal valorCondicion;
 	private int tipoCondicionNum;
 	
 	public int getTipoCondicionNum() {
@@ -10,10 +12,11 @@ public class CondicionNumerica extends Condicion {
 	public void setTipoCondicionNum(int tipoCondicionNum) {
 		this.tipoCondicionNum = tipoCondicionNum;
 	}
-	public float getValorCondicion() {
+	public BigDecimal getValorCondicion() {
 		return valorCondicion;
 	}
-	public void setValorCondicion(float valorCondicion) {
+	public void setValorCondicion(BigDecimal valorCondicion) {
 		this.valorCondicion = valorCondicion;
 	}
+	
 }
