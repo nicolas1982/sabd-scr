@@ -23,22 +23,25 @@ public class Sector {
 	public String getFechahorafin() {
 		return fechahorafin;
 	}
-	public void setFechahorafin(java.util.Date fecha) {
+	public void setFechahorafin(String fecha) {
 		String dameputafecha = fecha.toString();
-		String anio = dameputafecha.substring(0,4);
-		String dia = dameputafecha.substring(5,7);
-		String mes = dameputafecha.substring(8,10);
-		this.fechahorafin  = dia + "/" + mes + "/" + anio;
+		String dia = dameputafecha.substring(0,2);
+		String mes = dameputafecha.substring(3,5);
+		String anio = dameputafecha.substring(6);
+
+		this.fechahorafin  = anio + "-" + mes + "-" + dia;
+		//this.fechahorafin = fecha;
 	}
 	public String getFechahorainicio() {
 		return fechahorainicio;
 	}
-	public void setFechahorainicio(java.util.Date fecha) {
+	public void setFechahorainicio(String fecha) {
 		String dameputafecha = fecha.toString();
-		String anio = dameputafecha.substring(0,4);
-		String dia = dameputafecha.substring(5,7);
-		String mes = dameputafecha.substring(8,10);
-		this.fechahorainicio  = dia + "/" + mes + "/" + anio;
+		String dia = dameputafecha.substring(0,2);
+		String mes = dameputafecha.substring(3,5);
+		String anio = dameputafecha.substring(6);
+		this.fechahorainicio  = anio + "-" + mes + "-" + dia;
+		//this.fechahorainicio = fecha;
 	}
 	public Integer getIdcampo() {
 		return idcampo;
