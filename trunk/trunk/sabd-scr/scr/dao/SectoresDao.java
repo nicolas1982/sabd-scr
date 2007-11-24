@@ -5,6 +5,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import scr.entidades.Sector;
@@ -70,8 +74,30 @@ public class SectoresDao extends JdbcManager {
 			sector.setIdcontrato(rs.getInt(3));
 			sector.setIdcampo(rs.getInt(4));
 			sector.setDescripcion(rs.getString(5));
-			sector.setFechahorainicio(rs.getDate(6));
-			sector.setFechahorafin(rs.getDate(7));
+			Calendar calendar = new GregorianCalendar();
+			calendar.setTime(rs.getTime(6));
+//			sector.setFechahorainicio(calendar.get(Calendar.DATE) + "/" + calendar.get(Calendar.MONTH + 1) + "/" + calendar.get(Calendar.YEAR));
+			String mes = "";
+			if(calendar.get(Calendar.MONTH + 1) < 10){
+				mes = "0" + calendar.get(Calendar.MONTH + 1);
+			}
+			String dia = "";
+			if(calendar.get(Calendar.DATE) < 10){
+				dia = "0" + calendar.get(Calendar.DATE);
+			}
+			sector.setFechahorainicio(calendar.get(Calendar.YEAR) + "-" + mes + "-" + dia);
+			calendar = new GregorianCalendar();
+			calendar.setTime(rs.getTime(7));
+			mes = "";
+			if(calendar.get(Calendar.MONTH + 1) < 10){
+				mes = "0" + calendar.get(Calendar.MONTH + 1);
+			}
+			dia = "";
+			if(calendar.get(Calendar.DATE) < 10){
+				dia = "0" + calendar.get(Calendar.DATE);
+			}
+//			sector.setFechahorafin(calendar.get(Calendar.DATE) + "/" + calendar.get(Calendar.MONTH + 1) + "/" + calendar.get(Calendar.YEAR));
+			sector.setFechahorafin(calendar.get(Calendar.YEAR) + "-" + mes + "-" + dia);
 			sector.setSrhectareas(rs.getInt(8));
 			vec.add(sector);
 		}
@@ -133,10 +159,10 @@ public class SectoresDao extends JdbcManager {
 		cStatement.setInt(2, sector.getIdcontrato());
 		cStatement.setInt(3, sector.getIdcampo());
 		cStatement.setString(4, sector.getDescripcion());
-		//cStatement.setString(5, sector.getFechahorainicio().toString());
-		cStatement.setString(5, "2001-01-01");
-		//cStatement.setString(6, sector.getFechahorafin().toString());
-		cStatement.setString(6, "2010-01-01");
+		cStatement.setString(5, sector.getFechahorainicio());
+		//cStatement.setString(5, "2001-01-01");
+		cStatement.setString(6, sector.getFechahorafin());
+		//cStatement.setString(6, "2010-01-01");
 		cStatement.setInt(7, sector.getSrhectareas());
 		rs = cStatement.executeQuery();		
 		

@@ -27,7 +27,7 @@ public class CondicionHorariaDao extends JdbcManager {
 		cs.setInt(3, condicionHoraria.getComparador());
 		cs.setInt(4, condicionHoraria.getInicio());
 		cs.setInt(5, new Integer(1));//no se usa
-		cs.setInt(6, condicionHoraria.getValorCondicion());
+		cs.setTime(6, condicionHoraria.getValorCondicion());
 		cs.setInt(7, new Integer(0));//0
 	
 		rs = cs.executeQuery();

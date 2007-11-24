@@ -25,7 +25,7 @@ public class CondicionNumericaDao extends JdbcManager {
 			cs.setInt(3, condicionNumerica.getComparador());
 			cs.setInt(4, condicionNumerica.getInicio());
 			cs.setInt(5, condicionNumerica.getTipoCondicionNum());//no se usa
-			cs.setFloat(6, condicionNumerica.getValorCondicion());
+			cs.setBigDecimal(6, condicionNumerica.getValorCondicion());
 			cs.setInt(7, new Integer(1));//1
 		
 			ResultSet rs = cs.executeQuery();
